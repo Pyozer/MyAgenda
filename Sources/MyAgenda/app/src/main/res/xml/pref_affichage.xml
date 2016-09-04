@@ -1,0 +1,17 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:defaultValue="@string/pref_nbWeeks"
+        android:inputType="number"
+        android:key="nbWeeks"
+        android:maxLines="1"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:title="@string/pref_title_nbWeeks" />
+
+    <SwitchPreference
+        android:title="@string/pref_title_displayTD"
+        android:defaultValue="false"
+        android:key="display_TD" />
+
+</PreferenceScreen>

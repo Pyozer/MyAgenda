@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">My Agenda</string>
+    <string name="version_app">1.0.2</string>
+    <string name="version_app_menu">v1.0.2</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Menus -->
+    <string name="menu_about">A propos</string>
+    <string name="menu_settings">Paramètres</string>
+    <string name="menu_update">Mise à jour</string>
+
+    <!-- Paramètres -->
+    <string name="pref_header_mygroup">Général</string>
+    <string name="pref_header_display">Affichage</string>
+
+    <string name="pref_title_groupe">Sélectionne ton groupe</string>
+    <string name="pref_title_groupeTD">Sélectionne ton groupe de TD</string>
+
+    <string-array name="pref_group_titles">
+        <item>Groupe A</item>
+        <item>Groupe B</item>
+        <item>Groupe C</item>
+        <item>Groupe D</item>
+    </string-array>
+    <string-array name="pref_group_values">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+    </string-array>
+
+    <string name="pref_title_nbWeeks">Nombre de semaine(s) à afficher</string>
+    <string name="pref_nbWeeks">1</string>
+
+    <string name="pref_title_displayTD">Afficher agenda du groupe TD</string>
+
+    <string name="pref_ringtone_silent"></string>
+
+    <!-- Update -->
+    <string name="update_check_text">Vérifier les mises à jours</string>
+    <string name="update_check_noupdate">Vous avez la dernière version de l\'application :D</string>
+    <string name="update_download_last">Télécharger la dernière version</string>
+    <string name="update_text_title">Vérifiez si vous possédez la dernière version de l\'application.</string>
+
+    <string name="update_dialog_title">Mise à jour</string>
+    <string name="update_dialog_newupdate">Une version plus récente existe !</string>
+    <string name="update_dialog_download">Télécharger</string>
+
+    <!-- Erreurs -->
+    <string name="erreur">Erreur</string>
+    <string name="no_internet">Aucune connexion internet.</string>
+    <string name="no_connexion_github">Impossible de se connecter au github.</string>
+    <string name="no_connexion_client">Impossible de se connecter au serveur.</string>
+
+    <!-- A propos -->
+    <string name="about_text">
+        <b>Qu\'est-ce que c\'est ?</b>
+        \n\n
+
+        Cette application est relié à l\'agenda présent sur l\'ENT.\n
+        Elle vous permet d\'avoir directement accès à votre agenda via votre téléphone ou tablette sans avoir besoin de se connecter à l\'ENT.\n\n
+
+        <b>Comment ça fonctionne ?</b>
+        \n\n
+
+        L\'application va effectuer une requête à un fichier PHP (présent sur un serveur WEB) qui va renvoyer au format JSON l\'agenda correspondant à votre groupe.\n
+        Elle va ensuite traiter celui-ci et l\'afficher sous forme de liste sur votre téléphone ou tablette.\n\n
+        Le fichier PHP quant à lui permet de convertire le fichier .ics récupéré via l\'ENT en tableau (array), puis va trier celui-ci en fonction du début du cours. Enfin, il va encoder le tableau au format JSON.
+    </string>
+
+</resources>
