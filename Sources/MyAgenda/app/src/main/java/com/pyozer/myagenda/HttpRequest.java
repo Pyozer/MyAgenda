@@ -1,6 +1,7 @@
 package com.pyozer.myagenda;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import org.json.JSONArray;
@@ -145,8 +147,7 @@ public class HttpRequest {
         String groupe = preferences.getString("groupe", "A");
         String groupeTD = preferences.getString("groupeTD", "B");
         String nbWeeks = preferences.getString("nbWeeks", "1");
-
-        Boolean display_td = preferences.getBoolean("display_TD", false);
+        String display_type = preferences.getString("displayType", "group");
 
         // On fait la requete
         String readTimeOut = "8000";
@@ -154,10 +155,12 @@ public class HttpRequest {
 
         String url = "http://interminale.fr.nf/MyAgenda/get_json.php?grp=" + groupe + "&grpTD=" + groupeTD + "&nbWeeks=" + nbWeeks;
 
-        if(display_td) {
-            url += "&displayTD=true";
+        if(Objects.equals(display_type, "all")) {
+            url += "&display=all";
+        } else if(Objects.equals(display_type, "groupTD")) {
+            url += "&display=groupTD";
         } else {
-            url += "&displayTD=false";
+            url += "&display=group";
         }
 
         new DownloadWebpageTask().execute(url, readTimeOut, connectTimeout);

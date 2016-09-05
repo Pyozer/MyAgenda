@@ -9,9 +9,11 @@
         android:singleLine="true"
         android:title="@string/pref_title_nbWeeks" />
 
-    <SwitchPreference
-        android:title="@string/pref_title_displayTD"
-        android:defaultValue="false"
-        android:key="display_TD" />
+    <ListPreference
+        android:defaultValue="group"
+        android:entries="@array/pref_displaygroupe_titles"
+        android:entryValues="@array/pref_displaygroupe_values"
+        android:key="displayType"
+        android:title="@string/pref_title_displaygroupe" />
 
 </PreferenceScreen>
