@@ -147,7 +147,6 @@ public class HttpRequest {
         String groupe = preferences.getString("groupe", "A");
         String groupeTD = preferences.getString("groupeTD", "B");
         String nbWeeks = preferences.getString("nbWeeks", "1");
-        String display_type = preferences.getString("displayType", "group");
 
         // On fait la requete
         String readTimeOut = "8000";
@@ -155,13 +154,7 @@ public class HttpRequest {
 
         String url = "http://interminale.fr.nf/MyAgenda/get_json.php?grp=" + groupe + "&grpTD=" + groupeTD + "&nbWeeks=" + nbWeeks;
 
-        if(Objects.equals(display_type, "all")) {
-            url += "&display=all";
-        } else if(Objects.equals(display_type, "groupTD")) {
-            url += "&display=groupTD";
-        } else {
-            url += "&display=group";
-        }
+        url += "&display=group";
 
         new DownloadWebpageTask().execute(url, readTimeOut, connectTimeout);
     }

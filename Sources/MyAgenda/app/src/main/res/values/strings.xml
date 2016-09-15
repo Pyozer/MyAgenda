@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Agenda</string>
-    <string name="version_app">1.0.3</string>
-    <string name="version_app_menu">v1.0.3</string>
+    <string name="version_app">1.0.4</string>
+    <string name="version_app_menu">v1.0.4</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -33,19 +33,6 @@
 
     <string name="pref_title_nbWeeks">Nombre de semaine(s) à afficher</string>
     <string name="pref_nbWeeks">1</string>
-
-    <string name="pref_title_displaygroupe">Quel type d\'agenda afficher</string>
-
-    <string-array name="pref_displaygroupe_titles">
-        <item>Agenda global</item>
-        <item>Agenda du groupe TD</item>
-        <item>Agenda du groupe</item>
-    </string-array>
-    <string-array name="pref_displaygroupe_values">
-        <item>all</item>
-        <item>groupTD</item>
-        <item>group</item>
-    </string-array>
 
     <string name="pref_ringtone_silent"></string>
 
