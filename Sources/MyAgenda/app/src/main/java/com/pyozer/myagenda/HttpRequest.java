@@ -184,37 +184,38 @@ public class HttpRequest {
 
                 // Getting JSON Array node
                 JSONArray all_agenda = jsonObj.getJSONArray("android");
-
+                
+                boolean first_display = false;
+                String PREVIOUSDAY;
+                
                 for (int i = 0; i < all_agenda.length(); i++) {
-                    if(i == 0) {
-                        JSONObject cInit = all_agenda.getJSONObject(0);
-                    } else {
-                        JSONObject cInit = all_agenda.getJSONObject(i - 1);
-                    }
-                    String PREVIOUSDAY = cInit.getString("DAY");
-                    
                     JSONObject c = all_agenda.getJSONObject(i);
                     String DAY = c.getString("DAY");
+                    
+                    if(i == 0 && first_display == false) {
+                        PREVIOUSDAY = DAY;
+                        first_display = true;
+                    }
+                    
                     String DATE = c.getString("DATE");
                     String SUMMARY = c.getString("SUMMARY");
                     String LOCATION = c.getString("LOCATION");
                     String DESCRIPTION = c.getString("DESCRIPTION");
-
+                    
                     HashMap<String, String> agenda = new HashMap<>();
 
-                    if(PREVIOUSDAY != DAY) {
-                        agenda.put("DATE", DAY);
-                        agenda.put("SUMMARY", "");
-                        agenda.put("LOCATION", "");.
-                        
+                    if(PREVIOUSDAY != DAY || (i == 0 && first_display == true)) {
+                        agenda.put("DATE", " ");
+                        agenda.put("SUMMARY", DAY);
+                        agenda.put("LOCATION", " ");
                         i--;
                     } else {
                         agenda.put("DATE", DATE);
                         agenda.put("SUMMARY", SUMMARY);
                         agenda.put("LOCATION", LOCATION + " - " + DESCRIPTION);
                     }
+                    
                     mainActivity.agendaList.add(agenda);
-
                     /**
                      * Updating parsed JSON data into ListView
                      * */
@@ -225,6 +226,8 @@ public class HttpRequest {
                             R.id.location, R.id.dtstart});
 
                     mainActivity.listView.setAdapter(adapter);
+                    // On stock la valeur du jour actuel
+                    PREVIOUSDAY = DAY;
 
                 }
             } catch (final JSONException e) {
