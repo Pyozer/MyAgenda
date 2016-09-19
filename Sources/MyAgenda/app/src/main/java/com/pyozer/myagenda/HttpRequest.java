@@ -186,8 +186,15 @@ public class HttpRequest {
                 JSONArray all_agenda = jsonObj.getJSONArray("android");
 
                 for (int i = 0; i < all_agenda.length(); i++) {
+                    if(i == 0) {
+                        JSONObject cInit = all_agenda.getJSONObject(0);
+                    } else {
+                        JSONObject cInit = all_agenda.getJSONObject(i - 1);
+                    }
+                    String PREVIOUSDAY = cInit.getString("DAY");
+                    
                     JSONObject c = all_agenda.getJSONObject(i);
-
+                    String DAY = c.getString("DAY");
                     String DATE = c.getString("DATE");
                     String SUMMARY = c.getString("SUMMARY");
                     String LOCATION = c.getString("LOCATION");
@@ -195,10 +202,17 @@ public class HttpRequest {
 
                     HashMap<String, String> agenda = new HashMap<>();
 
-                    agenda.put("DATE", DATE);
-                    agenda.put("SUMMARY", SUMMARY);
-                    agenda.put("LOCATION", LOCATION + " - " + DESCRIPTION);
-
+                    if(PREVIOUSDAY != DAY) {
+                        agenda.put("DATE", DAY);
+                        agenda.put("SUMMARY", "");
+                        agenda.put("LOCATION", "");.
+                        
+                        i--;
+                    } else {
+                        agenda.put("DATE", DATE);
+                        agenda.put("SUMMARY", SUMMARY);
+                        agenda.put("LOCATION", LOCATION + " - " + DESCRIPTION);
+                    }
                     mainActivity.agendaList.add(agenda);
 
                     /**
