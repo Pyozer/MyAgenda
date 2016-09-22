@@ -17,6 +17,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,11 +33,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected View mainactivity_layout;
-    protected HttpRequest HttpRequest;
-    public ListView listView;
+    private WebView mWebView;
     public TextView textTitle;
-
-    ArrayList<HashMap<String, String>> agendaList;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +54,10 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         textTitle = (TextView) findViewById(R.id.title);
+        mWebView = (WebView) findViewById(R.id.webView);
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
-        agendaList = new ArrayList<>();
-
-        listView = (ListView) findViewById(R.id.agenda);
         mainactivity_layout = findViewById(R.id.mainactivity_layout);
 
         // On vérifie la connexion internet
@@ -73,9 +74,42 @@ public class MainActivity extends AppCompatActivity
             snackbar.setActionTextColor(Color.RED);
             snackbar.show();
         } else {
-            HttpRequest = new HttpRequest(this);
-            HttpRequest.prepareUrlRequest();
+            mWebView.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(mWebView, url);
+                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                    Snackbar snackbar = Snackbar
+                            .make(mainactivity_layout, getString(R.string.no_connexion_client), Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Réessayer", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+                                }
+                            });
+                    snackbar.setActionTextColor(Color.RED);
+                    snackbar.show();
+                }
+            });
+            mWebView.loadUrl(prepareURL());
         }
+    }
+
+    public String prepareURL() {
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String groupe = preferences.getString("groupe", "A");
+        String nbWeeks = preferences.getString("nbWeeks", "1");
+
+        String url = "http://interminale.fr.nf/MyAgenda/get_calendar.php?grp=" + groupe + "&nbWeeks=" + nbWeeks;
+
+        url += "&version=" + getString(R.string.version_app);
+
+        return url;
     }
 
     // Permet de vérifier la connexion internet

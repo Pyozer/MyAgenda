@@ -32,11 +32,6 @@ public class HttpRequest {
 
     SharedPreferences preferences;
 
-    public HttpRequest(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-        preferences = PreferenceManager.getDefaultSharedPreferences(mainActivity);
-    }
-
     public HttpRequest(UpdateActivity updateActivity) {
         this.updateActivity = updateActivity;
         preferences = PreferenceManager.getDefaultSharedPreferences(updateActivity);
@@ -49,9 +44,7 @@ public class HttpRequest {
             try {
                 return downloadUrl(urls);
             } catch (IOException e) {
-                if(mainActivity != null) {
-                    doInBackgroundMainActivityError(urls);
-                } else if(updateActivity != null) {
+                if(updateActivity != null) {
                     return updateActivity.getString(R.string.no_connexion_github);
                 }
                 return null;
@@ -62,16 +55,12 @@ public class HttpRequest {
         protected void onPreExecute() {
             if (updateActivity != null) {
                 updateActivity.checkUpdate.setEnabled(false);
-            } else if(mainActivity != null) {
-
             }
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            if(mainActivity != null) {
-                onExecuteMainActivity(result);
-            } else if(updateActivity != null) {
+            if(updateActivity != null) {
                 onExecuteUpdateActivity(result);
             }
         }
@@ -142,101 +131,26 @@ public class HttpRequest {
     /**
      * On prépare les url pour la requete
      */
-    protected void prepareUrlRequest() {
+    /*protected void prepareUrlRequest() {
 
         String groupe = preferences.getString("groupe", "A");
-        String groupeTD = preferences.getString("groupeTD", "B");
         String nbWeeks = preferences.getString("nbWeeks", "1");
 
         // On fait la requete
         String readTimeOut = "8000";
         String connectTimeout = "8000";
 
-        String url = "http://interminale.fr.nf/MyAgenda/get_json.php?grp=" + groupe + "&grpTD=" + groupeTD + "&nbWeeks=" + nbWeeks;
+        String url = "http://interminale.fr.nf/MyAgenda/get_json.php?grp=" + groupe + "&nbWeeks=" + nbWeeks;
 
-        url += "&display=group";
+        url += "&version=" + mainActivity.getString(R.string.version_app);
 
         new DownloadWebpageTask().execute(url, readTimeOut, connectTimeout);
-    }
-
-    /**
-     * ERREUR GESTION AVANT LA REQUETE
-     * @param urls
-     * @return
-     */
-    public void doInBackgroundMainActivityError(String... urls) {
-        String erreur = mainActivity.getString(R.string.no_connexion_client);
-
-        Snackbar.make(mainActivity.mainactivity_layout, erreur, Snackbar.LENGTH_LONG).show();
-    }
+    }*/
 
     /**
      * GESTION APRES REQUETE FINI
-     * @param jsonStr
+     * @param result
      */
-    public void onExecuteMainActivity(String jsonStr) {
-        /* A la fin de la requete on retire le loader */
-        mainActivity.findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-        //Log.e("REQUETE", jsonStr);
-        if (jsonStr != null) {
-            try {
-                JSONObject jsonObj = new JSONObject(jsonStr);
-
-                // Getting JSON Array node
-                JSONArray all_agenda = jsonObj.getJSONArray("android");
-                
-                boolean first_display = false;
-                String PREVIOUSDAY;
-                
-                for (int i = 0; i < all_agenda.length(); i++) {
-                    JSONObject c = all_agenda.getJSONObject(i);
-                    String DAY = c.getString("DAY");
-                    
-                    if(i == 0 && first_display == false) {
-                        PREVIOUSDAY = DAY;
-                        first_display = true;
-                    }
-                    
-                    String DATE = c.getString("DATE");
-                    String SUMMARY = c.getString("SUMMARY");
-                    String LOCATION = c.getString("LOCATION");
-                    String DESCRIPTION = c.getString("DESCRIPTION");
-                    
-                    HashMap<String, String> agenda = new HashMap<>();
-
-                    if(PREVIOUSDAY != DAY || (i == 0 && first_display == true)) {
-                        agenda.put("DATE", " ");
-                        agenda.put("SUMMARY", DAY);
-                        agenda.put("LOCATION", " ");
-                        i--;
-                    } else {
-                        agenda.put("DATE", DATE);
-                        agenda.put("SUMMARY", SUMMARY);
-                        agenda.put("LOCATION", LOCATION + " - " + DESCRIPTION);
-                    }
-                    
-                    mainActivity.agendaList.add(agenda);
-                    /**
-                     * Updating parsed JSON data into ListView
-                     * */
-                    ListAdapter adapter = new SimpleAdapter(
-                            mainActivity, mainActivity.agendaList,
-                            R.layout.list_item, new String[]{"SUMMARY", "LOCATION",
-                            "DATE"}, new int[]{R.id.summary,
-                            R.id.location, R.id.dtstart});
-
-                    mainActivity.listView.setAdapter(adapter);
-                    // On stock la valeur du jour actuel
-                    PREVIOUSDAY = DAY;
-
-                }
-            } catch (final JSONException e) {
-                Log.e("JSON", "Json parsing error: " + e.getMessage());
-
-            }
-        }
-    }
-
     public void onExecuteUpdateActivity(String result) {
         // On enlève la dialog de chargement
         updateActivity.progressDialog.dismiss();

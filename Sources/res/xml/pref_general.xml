@@ -8,11 +8,4 @@
         android:key="groupe"
         android:title="@string/pref_title_groupe" />
 
-    <ListPreference
-        android:defaultValue="A"
-        android:entries="@array/pref_group_titles"
-        android:entryValues="@array/pref_group_values"
-        android:key="groupeTD"
-        android:title="@string/pref_title_groupeTD" />
-
 </PreferenceScreen>
