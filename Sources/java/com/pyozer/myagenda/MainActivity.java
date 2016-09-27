@@ -20,14 +20,7 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -103,10 +96,11 @@ public class MainActivity extends AppCompatActivity
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String groupe = preferences.getString("groupe", "A");
+        String annee = preferences.getString("annee", "1");
         String nbWeeks = preferences.getString("nbWeeks", "1");
 
-        String url = "http://interminale.fr.nf/MyAgenda/get_calendar.php?grp=" + groupe + "&nbWeeks=" + nbWeeks;
-
+        String url = "http://interminale.fr.nf/MyAgenda/get_calendar.php?annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
+        // On ajoute la version actuelle
         url += "&version=" + getString(R.string.version_app);
 
         return url;

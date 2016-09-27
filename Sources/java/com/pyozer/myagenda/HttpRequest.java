@@ -1,20 +1,8 @@
 package com.pyozer.myagenda;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
-import android.widget.HeaderViewListAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,12 +10,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
 
 public class HttpRequest {
-    private MainActivity mainActivity = null;
     private UpdateActivity updateActivity = null;
 
     SharedPreferences preferences;
@@ -127,25 +111,6 @@ public class HttpRequest {
         }
         return sb.toString();
     }
-
-    /**
-     * On prépare les url pour la requete
-     */
-    /*protected void prepareUrlRequest() {
-
-        String groupe = preferences.getString("groupe", "A");
-        String nbWeeks = preferences.getString("nbWeeks", "1");
-
-        // On fait la requete
-        String readTimeOut = "8000";
-        String connectTimeout = "8000";
-
-        String url = "http://interminale.fr.nf/MyAgenda/get_json.php?grp=" + groupe + "&nbWeeks=" + nbWeeks;
-
-        url += "&version=" + mainActivity.getString(R.string.version_app);
-
-        new DownloadWebpageTask().execute(url, readTimeOut, connectTimeout);
-    }*/
 
     /**
      * GESTION APRES REQUETE FINI

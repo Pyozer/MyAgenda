@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">My Agenda</string>
-    <string name="version_app">2.0.0</string>
-    <string name="version_app_menu">v2.0.0</string>
+    <string name="version_app">2.0.1</string>
+    <string name="version_app_menu">v2.0.1</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
+    <string name="navigation_drawer_close">Fermer le menu de navigation</string>
 
     <!-- Menus -->
     <string name="menu_about">A propos</string>
@@ -16,7 +16,7 @@
     <string name="pref_header_display">Affichage</string>
 
     <string name="pref_title_groupe">Sélectionne ton groupe</string>
-    <string name="pref_title_groupeTD">Sélectionne ton groupe de TD</string>
+    <string name="pref_title_annee">Sélectionne ton année</string>
 
     <string-array name="pref_group_titles">
         <item>Groupe A</item>
@@ -29,6 +29,15 @@
         <item>B</item>
         <item>C</item>
         <item>D</item>
+    </string-array>
+
+    <string-array name="pref_annee_titles">
+        <item>1ère année</item>
+        <item>2ème année</item>
+    </string-array>
+    <string-array name="pref_annee_values">
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string name="pref_title_nbWeeks">Nombre de semaine(s) à afficher</string>
