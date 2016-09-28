@@ -20,15 +20,15 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected View mainactivity_layout;
     private WebView mWebView;
-    public TextView textTitle;
     SharedPreferences preferences;
+
+    private boolean no_internet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        textTitle = (TextView) findViewById(R.id.title);
         mWebView = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -66,30 +65,37 @@ public class MainActivity extends AppCompatActivity
                     });
             snackbar.setActionTextColor(Color.RED);
             snackbar.show();
-        } else {
-            mWebView.setWebViewClient(new WebViewClient() {
-                @Override
-                public void onPageFinished(WebView view, String url) {
-                    super.onPageFinished(mWebView, url);
-                    findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                    Snackbar snackbar = Snackbar
-                            .make(mainactivity_layout, getString(R.string.no_connexion_client), Snackbar.LENGTH_INDEFINITE)
-                            .setAction("Réessayer", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    startActivity(new Intent(MainActivity.this, MainActivity.class));
-                                }
-                            });
-                    snackbar.setActionTextColor(Color.RED);
-                    snackbar.show();
-                }
-            });
-            mWebView.loadUrl(prepareURL());
+            no_internet = true;
         }
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(mWebView, url);
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                String error = getString(R.string.no_connexion_client);
+                if(no_internet) {
+                    error = getString(R.string.no_internet);
+                }
+                Snackbar snackbar = Snackbar
+                        .make(mainactivity_layout, error, Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Réessayer", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                            }
+                        });
+                snackbar.setActionTextColor(Color.RED);
+                snackbar.show();
+                // On rend invisible la WebView pour éviter un affichage dégeulasse ;)
+                mWebView.setVisibility(View.GONE);
+            }
+        });
+        mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        mWebView.loadUrl(prepareURL());
     }
 
     public String prepareURL() {
@@ -110,7 +116,7 @@ public class MainActivity extends AppCompatActivity
     public boolean checkInternet() {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
+        if(networkInfo != null && networkInfo.isConnected()) {
             return true;
         } else {
             return false;
