@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Agenda</string>
-    <string name="version_app">2.0.2</string>
-    <string name="version_app_menu">v2.0.2</string>
+    <string name="version_app">2.0.3</string>
+    <string name="version_app_menu">v2.0.3</string>
 
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
     <string name="navigation_drawer_close">Fermer le menu de navigation</string>

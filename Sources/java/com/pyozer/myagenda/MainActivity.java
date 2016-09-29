@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mWebView = (WebView) findViewById(R.id.webView);
-        WebSettings webSettings = mWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
 
         mainactivity_layout = findViewById(R.id.mainactivity_layout);
 
@@ -94,7 +92,9 @@ public class MainActivity extends AppCompatActivity
                 mWebView.setVisibility(View.GONE);
             }
         });
-        mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        if(no_internet) {
+            mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        }
         mWebView.loadUrl(prepareURL());
     }
 
