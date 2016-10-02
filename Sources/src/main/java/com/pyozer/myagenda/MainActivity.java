@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity
         String groupe = preferences.getString("groupe", "A");
         String nbWeeks = preferences.getString("nbWeeks", "1");
 
-        String url = "http://interminale.fr.nf/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
+        String url = "http://jourmagic.fr/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
         // On ajoute la version actuelle
         url += "&version=" + getString(R.string.version_app);
 
