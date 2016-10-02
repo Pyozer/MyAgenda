@@ -15,22 +15,37 @@
     <string name="pref_header_mygroup">Général</string>
     <string name="pref_header_display">Affichage</string>
 
-    <string name="pref_title_groupe">Sélectionne ton groupe</string>
+    <string name="pref_title_depart">Sélectionne ton département</string>
     <string name="pref_title_annee">Sélectionne ton année</string>
+    <string name="pref_title_groupe">Sélectionne ton groupe</string>
 
-    <string-array name="pref_group_titles">
+    <string-array name="pref_depart_titles">
+        <item>Informatique</item>
+        <item>M.M.I</item>
+        <item>Génie biologie</item>
+        <item>TC</item>
+    </string-array>
+    <string-array name="pref_depart_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="pref_group_titles_info_mm2">
         <item>Groupe A</item>
         <item>Groupe B</item>
         <item>Groupe C</item>
         <item>Groupe D</item>
     </string-array>
-    <string-array name="pref_group_values">
+    <string-array name="pref_group_values_info_mm2">
         <item>A</item>
         <item>B</item>
         <item>C</item>
         <item>D</item>
     </string-array>
 
+    <!-- FIN GROUPE DEPART -->
     <string-array name="pref_annee_titles">
         <item>1ère année</item>
         <item>2ème année</item>
@@ -66,14 +81,14 @@
         <b>Qu\'est-ce que c\'est ?</b>
         \n\n
 
-        Cette application est relié à l\'agenda présent sur l\'ENT.\n
+        Cette application est reliée à l\'agenda présent sur l\'ENT.\n
         Elle vous permet d\'avoir directement accès à votre agenda via votre téléphone ou tablette sans avoir besoin de se connecter à l\'ENT.\n\n
 
         <b>Comment ça fonctionne ?</b>
         \n\n
 
         L\'application va afficher grâce à une WebView une page présente sur un serveur WEB l\'agenda correspondant à votre groupe.\n
-        Le fichier PHP quant à lui permet de convertire le fichier .ics récupéré via l\'ENT en tableau (array), puis va trier celui-ci en fonction du début du cours. Enfin, il va afficher les données sous forme de liste.
+        Le fichier PHP quant à lui permet de convertir le fichier .ics récupéré via l\'ENT en tableau (array), puis va trier celui-ci en fonction du début du cours. Enfin, il va afficher les données sous forme de liste.
     </string>
 
 </resources>

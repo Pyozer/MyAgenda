@@ -1,9 +1,9 @@
 package com.pyozer.myagenda;
 
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -35,12 +36,14 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
+
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
      */
+
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
-        @Override
+
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
 
@@ -109,12 +112,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
 
-        // Trigger the listener immediately with the preference's
-        // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+        Object value = PreferenceManager.getDefaultSharedPreferences(preference.getContext()).getString(preference.getKey(), "");
+
+        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, value);
+
     }
 
     @Override
@@ -178,19 +179,79 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * activity is showing a two-pane settings UI.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class GeneralPreferenceFragment extends PreferenceFragment {
+    public static class GeneralPreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            prefs.registerOnSharedPreferenceChangeListener(this);
+
+            ListPreference depart = (ListPreference) findPreference("depart");
+            ListPreference annee = (ListPreference) findPreference("annee");
+            setPreferenceValues(depart.getValue(), annee.getValue(), (ListPreference) findPreference("groupe"));
+
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("groupe"));
+            bindPreferenceSummaryToValue(findPreference("depart"));
             bindPreferenceSummaryToValue(findPreference("annee"));
+            bindPreferenceSummaryToValue(findPreference("groupe"));
+        }
+
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            ListPreference groupe = (ListPreference) findPreference("groupe");
+
+            String depart = sharedPreferences.getString("depart", "1");
+            String annee = sharedPreferences.getString("annee", "1");
+
+            setPreferenceValues(depart, annee, groupe);
+        }
+
+        protected ListPreference setPreferenceValues(String depart, String annee, ListPreference group) {
+            CharSequence[] titles_info_mm2 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D"};
+            CharSequence[] values_info_mm2 = {"A", "B", "C", "D"};
+
+            CharSequence[] titles_mmi1_gb1 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D", "Groupe E", "Groupe F"};
+            CharSequence[] values_mmi1_gb1 = {"A", "B", "C", "D", "E", "F"};
+
+            CharSequence[] titles_gb2 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D", "Groupe E"};
+            CharSequence[] values_gb2 = {"A", "B", "C", "D", "E"};
+
+            CharSequence[] titles_tc1 = {"TP 111", "TP 112", "TP 121", "TP 122", "TP 123", "TP 131", "TP 132", "TP 141", "TP 142"};
+            CharSequence[] values_tc1 = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+
+            CharSequence[] titles_tc2 = {"TP 211", "TP 212", "TP 221", "TP 222", "TP 223", "TP 231", "TP 232", "TP 241", "TP 242", "TP 243"};
+            CharSequence[] values_tc2 = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+
+            if(Objects.equals(depart, "1") || (Objects.equals(depart, "2") && Objects.equals(annee, "2"))) { // Si Info
+                group.setEntries(titles_info_mm2);
+                group.setEntryValues(values_info_mm2);
+            } else if((Objects.equals(depart, "2") && Objects.equals(annee, "1")) || (Objects.equals(depart, "3") && Objects.equals(annee, "1")))  {
+                group.setEntries(titles_mmi1_gb1);
+                group.setEntryValues(values_mmi1_gb1);
+            } else if((Objects.equals(depart, "3") && Objects.equals(annee, "2")))  {
+                group.setEntries(titles_gb2);
+                group.setEntryValues(values_gb2);
+            } else if(Objects.equals(depart, "4") && Objects.equals(annee, "1"))  {
+                group.setEntries(titles_tc1);
+                group.setEntryValues(values_tc1);
+            } else if(Objects.equals(depart, "4") && Objects.equals(annee, "2"))  {
+                group.setEntries(titles_tc2);
+                group.setEntryValues(values_tc2);
+            } else {
+                group.setEntries(titles_tc2);
+                group.setEntryValues(values_tc2);
+            }
+
+            if(group.getValue() == null || group.findIndexOfValue(group.getValue()) < 0) {
+                group.setValueIndex(0);
+            }
+            group.setSummary(group.getEntries()[group.findIndexOfValue(group.getValue())].toString());
+            group.setKey("groupe");
+
+            return group;
         }
 
         @Override
@@ -216,9 +277,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
             bindPreferenceSummaryToValue(findPreference("nbWeeks"));
         }
 

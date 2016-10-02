@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mWebView = (WebView) findViewById(R.id.webView);
+        WebSettings webSettings = mWebView.getSettings();
+        mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
+        webSettings.setJavaScriptEnabled(true);
 
         mainactivity_layout = findViewById(R.id.mainactivity_layout);
 
@@ -92,6 +95,8 @@ public class MainActivity extends AppCompatActivity
                 mWebView.setVisibility(View.GONE);
             }
         });
+        mWebView.getSettings().setAppCachePath(this.getCacheDir().getPath());
+        mWebView.getSettings().setAppCacheEnabled(true);
         if(no_internet) {
             mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         }
@@ -101,11 +106,12 @@ public class MainActivity extends AppCompatActivity
     public String prepareURL() {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String groupe = preferences.getString("groupe", "A");
+        String depart = preferences.getString("depart", "1");
         String annee = preferences.getString("annee", "1");
+        String groupe = preferences.getString("groupe", "A");
         String nbWeeks = preferences.getString("nbWeeks", "1");
 
-        String url = "http://interminale.fr.nf/MyAgenda/get_calendar.php?annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
+        String url = "http://interminale.fr.nf/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
         // On ajoute la version actuelle
         url += "&version=" + getString(R.string.version_app);
 

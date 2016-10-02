@@ -1,4 +1,12 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="preferencescreen">
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/pref_depart_titles"
+        android:entryValues="@array/pref_depart_values"
+        android:key="depart"
+        android:title="@string/pref_title_depart" />
 
     <ListPreference
         android:defaultValue="1"
@@ -9,8 +17,8 @@
 
     <ListPreference
         android:defaultValue="A"
-        android:entries="@array/pref_group_titles"
-        android:entryValues="@array/pref_group_values"
+        android:entries="@array/pref_group_titles_info_mm2"
+        android:entryValues="@array/pref_group_values_info_mm2"
         android:key="groupe"
         android:title="@string/pref_title_groupe" />
 
