@@ -98,7 +98,9 @@ public class MainActivity extends AppCompatActivity
         mWebView.getSettings().setAppCachePath(this.getCacheDir().getPath());
         mWebView.getSettings().setAppCacheEnabled(true);
         if(no_internet) {
-            mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+        } else {
+            mWebView.clearCache(true);
         }
         mWebView.loadUrl(prepareURL());
     }
