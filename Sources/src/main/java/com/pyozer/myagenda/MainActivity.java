@@ -37,14 +37,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         mWebView = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = mWebView.getSettings();
@@ -99,21 +99,18 @@ public class MainActivity extends AppCompatActivity
         mWebView.getSettings().setAppCacheEnabled(true);
         if(no_internet) {
             mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-        } else {
-            mWebView.clearCache(true);
         }
         mWebView.loadUrl(prepareURL());
     }
 
     public String prepareURL() {
-
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String depart = preferences.getString("depart", "1");
         String annee = preferences.getString("annee", "1");
         String groupe = preferences.getString("groupe", "A");
         String nbWeeks = preferences.getString("nbWeeks", "1");
 
-        String url = "http://jourmagic.fr/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
+        String url = "http://interminale.fr.nf/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
         // On ajoute la version actuelle
         url += "&version=" + getString(R.string.version_app);
 

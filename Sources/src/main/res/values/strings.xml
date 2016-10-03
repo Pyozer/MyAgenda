@@ -58,7 +58,7 @@
     <string name="pref_title_nbWeeks">Nombre de semaine(s) à afficher</string>
     <string name="pref_nbWeeks">1</string>
 
-    <string name="pref_ringtone_silent"></string>
+    <string name="pref_ringtone_silent">null</string>
 
     <!-- Update -->
     <string name="update_check_text">Vérifier les mises à jours</string>
@@ -81,14 +81,21 @@
         <b>Qu\'est-ce que c\'est ?</b>
         \n\n
 
-        Cette application est reliée à l\'agenda présent sur l\'ENT.\n
+        Cette application est reliée à l\'agenda de l\'IUT de Laval présent sur l\'ENT.\n
         Elle vous permet d\'avoir directement accès à votre agenda via votre téléphone ou tablette sans avoir besoin de se connecter à l\'ENT.\n\n
 
         <b>Comment ça fonctionne ?</b>
         \n\n
 
-        L\'application va afficher grâce à une WebView une page présente sur un serveur WEB l\'agenda correspondant à votre groupe.\n
+        L\'application va afficher grâce à une WebView une page présente sur un serveur WEB l\'agenda correspondant à votre département, année et groupe.\n
         Le fichier PHP quant à lui permet de convertir le fichier .ics récupéré via l\'ENT en tableau (array), puis va trier celui-ci en fonction du début du cours. Enfin, il va afficher les données sous forme de liste.
+
+        <b>L\'Auteur ?</b>
+        \n\n
+
+        C\'est moi, Jean-Charles Moussé, un étudiant en 1ère année au département Informatique qui a réalisé My Agenda.\n
+        Ayant eu marre de devoir toujours se connecter à l\'ENT pour voir l\'emploi du temps, j\'ai décidé de créer cette application pour me faciliter la vie ;)\n
+        Au fil du temps et des remarques je l\'ai amélioré, pour au final intégrer tous les départements de l\'IUT.
     </string>
 
 </resources>

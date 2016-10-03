@@ -35,6 +35,25 @@ public class WebAppInterface {
     }
 
     @JavascriptInterface
+    public void showAndroidDialogParams(String title, String message) {
+        new AlertDialog.Builder(mContext)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent myIntent = new Intent(mContext, SettingsActivity.class);
+                        mContext.startActivity(myIntent);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
+    }
+
+    @JavascriptInterface
     public void redirectMaj() {
         Intent myIntent = new Intent(mContext, UpdateActivity.class);
         mContext.startActivity(myIntent);
