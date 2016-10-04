@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,9 +22,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     protected View mainactivity_layout;
     private WebView mWebView;
     SharedPreferences preferences;
@@ -55,6 +56,14 @@ public class MainActivity extends AppCompatActivity
         mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
         webSettings.setJavaScriptEnabled(true);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPage(true);
+            }
+        });
+
         mainactivity_layout = findViewById(R.id.mainactivity_layout);
 
         // On vérifie la connexion internet
@@ -72,11 +81,17 @@ public class MainActivity extends AppCompatActivity
             snackbar.show();
             no_internet = true;
         }
+        /* On charge la WebView */
+        getPage(false);
+    }
+
+    protected void getPage(boolean clearCache){
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(mWebView, url);
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -97,12 +112,16 @@ public class MainActivity extends AppCompatActivity
                 snackbar.show();
                 // On rend invisible la WebView pour éviter un affichage dégeulasse ;)
                 mWebView.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         mWebView.getSettings().setAppCachePath(this.getCacheDir().getPath());
         mWebView.getSettings().setAppCacheEnabled(true);
         if(no_internet) {
             mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+        }
+        if(!no_internet && clearCache) {
+            mWebView.clearCache(clearCache);
         }
         mWebView.loadUrl(prepareURL());
     }
