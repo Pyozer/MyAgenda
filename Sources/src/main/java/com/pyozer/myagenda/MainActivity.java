@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+		if (PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("pref_dark_theme", false)) {
+            setTheme(R.style.AppThemeNight_NoActionBar);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -109,10 +113,14 @@ public class MainActivity extends AppCompatActivity
         String annee = preferences.getString("annee", "1");
         String groupe = preferences.getString("groupe", "A");
         String nbWeeks = preferences.getString("nbWeeks", "1");
+        boolean nightMode = preferences.getBoolean("pref_dark_theme", false);
+        String theme = (nightMode) ? "dark" : "light";
 
         String url = "http://interminale.fr.nf/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
         // On ajoute la version actuelle
         url += "&version=" + getString(R.string.version_app);
+        // On ajoute le thème désiré
+        url += "&theme=" + theme;
 
         return url;
     }

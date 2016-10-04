@@ -3,12 +3,12 @@
     <!-- These settings headers are only used on tablets. -->
     <header
         android:fragment="com.pyozer.myagenda.SettingsActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_group_black_24dp"
+        android:icon="?attr/themedMenuGroupDrawable"
         android:title="@string/pref_header_mygroup" />
 
     <header
         android:fragment="com.pyozer.myagenda.SettingsActivity$DisplayPreferenceFragment"
-        android:icon="@drawable/ic_visibility_black_24dp"
+        android:icon="?attr/themedMenuVisibilityDrawable"
         android:title="@string/pref_header_display" />
 
 </preference-headers>

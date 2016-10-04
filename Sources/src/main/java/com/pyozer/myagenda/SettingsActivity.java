@@ -20,7 +20,6 @@ import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -120,6 +119,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
+            setTheme(R.style.AppThemeNight);
+        }
         super.onCreate(savedInstanceState);
         setupActionBar();
     }

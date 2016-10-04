@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!-- THEME LIGHT -->
     <color name="colorPrimary">#d32f2f</color>
-    <color name="colorPrimaryDark">#b71c1c</color>
+    <color name="colorPrimaryDark">#d50000</color>
     <color name="colorAccent">#d32f2f</color>
+	<color name="textColorPrimary">#eeeeee</color>
+	<color name="textColorSecondary">#9E9E9E</color>
+	
+	<!-- THEME DARK -->
+    <color name="colorAccentNight">#7ec7c0</color>
+	<color name="textColorPrimaryNight">#f3f3f3</color>
+	<color name="textColorSecondaryNight">#b3b3b3</color>
 
-    <color name="backgroundNight">#243447</color>
-    <color name="backgroundNightDark">#1b2836</color>
-    <color name="textNight">#F6FBFC</color>
+    <color name="backgroundNight">#424242</color>
+    <color name="backgroundNightDark">#212121</color>
 
+	<!-- AUTRE -->
     <color name="white">#FFFFFF</color>
 
     <color name="bg_gradient_start">#31244e</color>

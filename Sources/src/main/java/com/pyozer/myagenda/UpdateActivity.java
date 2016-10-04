@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,10 @@ public class UpdateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("pref_dark_theme", false)) {
+            setTheme(R.style.AppThemeNight);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
         ActionBar actionBar = getSupportActionBar();

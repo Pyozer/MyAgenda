@@ -1,12 +1,33 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="themedMenuGroupDrawable">@drawable/ic_group_black_24dp</item>
+        <item name="themedMenuVisibilityDrawable">@drawable/ic_visibility_black_24dp</item>
     </style>
+	<!-- ################# -->
+	<!-- #   THEME NUIT  # -->
+	<!-- ################# -->
+	<style name="AppThemeNight" parent="Theme.AppCompat">
+		<item name="colorPrimary">@color/backgroundNight</item>
+		<item name="colorPrimaryDark">@color/backgroundNightDark</item>
+		<item name="colorAccent">@color/colorAccentNight</item>
+		<item name="android:textColorPrimary">@color/textColorPrimaryNight</item>
+		<item name="android:textColorSecondary">@color/textColorSecondaryNight</item>
+
+        <item name="themedMenuGroupDrawable">@drawable/ic_group_white_24dp</item>
+        <item name="themedMenuVisibilityDrawable">@drawable/ic_visibility_white_24dp</item>
+	</style>
+	<style name="AppThemeNight.NoActionBar" parent="AppThemeNight">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -14,7 +35,6 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
