@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mWebView = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = mWebView.getSettings();
-        mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
         webSettings.setJavaScriptEnabled(true);
+        mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
         }
         if(!no_internet && clearCache) {
-            mWebView.clearCache(clearCache);
+            mWebView.clearCache(true);
         }
         mWebView.loadUrl(prepareURL());
     }

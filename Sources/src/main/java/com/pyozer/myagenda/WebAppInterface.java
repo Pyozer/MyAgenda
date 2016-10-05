@@ -33,7 +33,25 @@ public class WebAppInterface {
             })
             .show();
     }
-
+    /** Affiche une boite de dialogue pouvant rediriger vers le menu Mise à jour **/
+    @JavascriptInterface
+    public void showAndroidDialogMaj(String title, String message, String yes, String no) {
+        new AlertDialog.Builder(mContext)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        redirectMaj();
+                    }
+                })
+                .setNegativeButton(no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
+    }
+    /** Affiche une boite de dialogue pouvant rediriger vers le menu Paramètres */
     @JavascriptInterface
     public void showAndroidDialogParams(String title, String message) {
         new AlertDialog.Builder(mContext)
@@ -52,7 +70,7 @@ public class WebAppInterface {
                 })
                 .show();
     }
-
+    /** Redirige vers le menu Mise à jour **/
     @JavascriptInterface
     public void redirectMaj() {
         Intent myIntent = new Intent(mContext, UpdateActivity.class);
