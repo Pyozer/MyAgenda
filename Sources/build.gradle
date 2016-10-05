@@ -11,6 +11,11 @@ android {
         versionCode 27
         versionName "2.0.7"
     }
+    signingConfigs {
+        debug {
+            storeFile file("myagenda.keystore")
+        }
+    }
     buildTypes {
         release {
             minifyEnabled true
