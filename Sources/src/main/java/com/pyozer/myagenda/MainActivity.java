@@ -25,7 +25,7 @@ import android.webkit.WebViewClient;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private SwipeRefreshLayout swipeRefreshLayout;
-    protected View mainactivity_layout;
+    protected View mainactivityLayout;
     private WebView mWebView;
     SharedPreferences preferences;
 
@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mainactivityLayout = findViewById(R.id.mainactivity_layout);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -51,36 +53,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        // On vérifie la connexion internet
+        if(!checkInternet()){
+            // Si pas internet, on met un message
+            displaySnackbar(mainactivityLayout, getString(R.string.no_internet));
+            no_internet = true;
+        }
+
         mWebView = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.rouge, R.color.indigo, R.color.lime);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getPage(true);
+                if(checkInternet()) {
+                    getPage(true);
+                } else {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         });
 
-        mainactivity_layout = findViewById(R.id.mainactivity_layout);
-
-        // On vérifie la connexion internet
-        if(!checkInternet()){
-            // Si pas internet, on met un message
-            Snackbar snackbar = Snackbar
-                    .make(mainactivity_layout, getString(R.string.no_internet), Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Rafraichir", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            startActivity(new Intent(MainActivity.this, MainActivity.class));
-                        }
-                    });
-            snackbar.setActionTextColor(Color.RED);
-            snackbar.show();
-            no_internet = true;
-        }
         /* On charge la WebView */
         getPage(false);
     }
@@ -100,16 +98,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(no_internet) {
                     error = getString(R.string.no_internet);
                 }
-                Snackbar snackbar = Snackbar
-                        .make(mainactivity_layout, error, Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Réessayer", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                startActivity(new Intent(MainActivity.this, MainActivity.class));
-                            }
-                        });
-                snackbar.setActionTextColor(Color.RED);
-                snackbar.show();
+                // On affiche la snackbar
+                displaySnackbar(mainactivityLayout, error);
                 // On rend invisible la WebView pour éviter un affichage dégeulasse ;)
                 mWebView.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
@@ -153,6 +143,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             return false;
         }
+    }
+
+    public void displaySnackbar(View mainactivityLayout, String error) {
+        Snackbar snackbar = Snackbar
+                .make(mainactivityLayout, error, Snackbar.LENGTH_INDEFINITE)
+                .setAction("Réessayer", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MainActivity.this.finish();
+                        startActivity(new Intent(MainActivity.this, MainActivity.class));
+                    }
+                });
+        snackbar.setActionTextColor(Color.YELLOW);
+        snackbar.show();
     }
 
     @Override

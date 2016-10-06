@@ -20,6 +20,14 @@ public class WebAppInterface {
     public void showToast(String toast) {
         Toast.makeText(mContext, toast, Toast.LENGTH_LONG).show();
     }
+
+    /** Redirige vers le menu Mise à jour **/
+    @JavascriptInterface
+    public void redirectMaj() {
+        Intent myIntent = new Intent(mContext, UpdateActivity.class);
+        mContext.startActivity(myIntent);
+    }
+
     /** Affiche une boite de dialogue **/
     @JavascriptInterface
     public void showDialog(String title, String message) {
@@ -33,6 +41,7 @@ public class WebAppInterface {
             })
             .show();
     }
+
     /** Affiche une boite de dialogue pouvant rediriger vers le menu Mise à jour **/
     @JavascriptInterface
     public void showAndroidDialogMaj(String title, String message, String yes, String no) {
@@ -51,6 +60,7 @@ public class WebAppInterface {
                 })
                 .show();
     }
+
     /** Affiche une boite de dialogue pouvant rediriger vers le menu Paramètres */
     @JavascriptInterface
     public void showAndroidDialogParams(String title, String message) {
@@ -70,11 +80,4 @@ public class WebAppInterface {
                 })
                 .show();
     }
-    /** Redirige vers le menu Mise à jour **/
-    @JavascriptInterface
-    public void redirectMaj() {
-        Intent myIntent = new Intent(mContext, UpdateActivity.class);
-        mContext.startActivity(myIntent);
-    }
-
 }

@@ -15,13 +15,8 @@ android {
         applicationId "com.pyozer.myagenda"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 28
-        versionName "2.0.8"
-    }
-    signingConfigs {
-        debug {
-            storeFile file("myagenda.keystore")
-        }
+        versionCode 29
+        versionName "2.0.9"
     }
     buildTypes {
         release {
