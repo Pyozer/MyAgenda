@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class UpdateActivity extends AppCompatActivity {
 
     protected TextView checkResult;
@@ -95,7 +97,7 @@ public class UpdateActivity extends AppCompatActivity {
     // On prépare l'url avant la requete
     protected void StartCheckUpdate() {
         String url = "https://raw.githubusercontent.com/Pyozer/MyAgenda/master/last_version.txt";
-        HttpRequest.new DownloadWebpageTask().execute(url, "3000", "3000");
+        HttpRequest.new DownloadWebpageTask().execute(url, "4000", "4000");
     }
 
     protected void showProgressDialog() {
@@ -116,7 +118,7 @@ public class UpdateActivity extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(getString(R.string.update_dialog_title));
 
-        if(actual_version.equals(version2download) || actual_version == version2download) { // Si pas de nouvelle version
+        if(actual_version.equals(version2download)) { // Si pas de nouvelle version
             alert.setMessage(getString(R.string.update_check_noupdate));
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
@@ -124,7 +126,7 @@ public class UpdateActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
             });
-        } else if(version2download == getString(R.string.no_connexion_github)){ // Si erreur lors de la récupération via github
+        } else if(Objects.equals(version2download, "error")){ // Si erreur lors de la récupération via github
             alert.setTitle(getString(R.string.erreur));
             alert.setMessage(getString(R.string.no_connexion_github));
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

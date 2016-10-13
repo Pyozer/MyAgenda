@@ -81,23 +81,23 @@
     <!-- A propos -->
     <string name="about_text">
         <font size="18"><b>Qu\'est-ce que c\'est ?</b></font>
-        \n\n
+        "\n\n"
 
-        Cette application est reliée à l\'agenda de l\'IUT de Laval présent sur l\'ENT.\n
-        Elle vous permet d\'avoir directement accès à votre agenda via votre téléphone ou tablette sans avoir besoin de se connecter à l\'ENT.
-        \n\n
+        "Cette application est reliée à l\'agenda de l\'IUT de Laval présent sur l\'ENT.\n"
+        "Elle vous permet d\'avoir directement accès à votre agenda via votre téléphone ou tablette sans avoir besoin de se connecter à l\'ENT."
+        "\n\n"
         <font size="18"><b>Comment ça fonctionne ?</b></font>
-        \n\n
+        "\n\n"
 
-        L\'application va afficher grâce à une WebView une page présente sur un serveur WEB l\'agenda correspondant à votre département, année et groupe.\n
-        Le fichier PHP quant à lui permet de convertir le fichier .ics récupéré via l\'ENT en tableau (array), puis va trier celui-ci en fonction du début du cours. Enfin, il va afficher les données sous forme de liste.
-        \n\n
+        "L\'application va afficher grâce à une WebView une page présente sur un serveur WEB l\'agenda correspondant à votre département, année et groupe.\n"
+        "Le fichier PHP quant à lui permet de convertir le fichier .ics récupéré via l\'ENT en tableau (array), puis va trier celui-ci en fonction du début du cours. Enfin, il va afficher les données sous forme de liste."
+        "\n\n"
         <font size="18"><b>L \' auteur ?</b></font>
-        \n\n
+        "\n\n"
 
-        C\'est moi, Jean-Charles Moussé, un étudiant en 1ère année au département Informatique qui a réalisé My Agenda.\n
-        Ayant eu marre de devoir toujours se connecter à l\'ENT pour voir l\'emploi du temps, j\'ai décidé de créer cette application pour me faciliter la vie ;)\n
-        Au fil du temps et des remarques je l\'ai amélioré, pour au final intégrer tous les départements de l\'IUT.
+        "C\'est moi, Jean-Charles Moussé, un étudiant en 1ère année au département Informatique qui a réalisé My Agenda.\n"
+        "Ayant eu marre de devoir toujours se connecter à l\'ENT pour voir l\'emploi du temps, j\'ai décidé de créer cette application pour me faciliter la vie ;)\n"
+        "Au fil du temps et des remarques je l\'ai amélioré, pour au final intégrer tous les départements de l\'IUT."
     </string>
 
 </resources>

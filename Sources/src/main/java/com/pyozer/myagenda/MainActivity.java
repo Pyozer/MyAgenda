@@ -1,5 +1,6 @@
 package com.pyozer.myagenda;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -27,14 +30,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SwipeRefreshLayout swipeRefreshLayout;
     protected View mainactivityLayout;
     private WebView mWebView;
+    private Snackbar snackbar;
+    private boolean SNACKBARSHOW = false;
+    private String URL_TO_LOAD;
     SharedPreferences preferences;
-
-    private boolean no_internet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-		if (PreferenceManager.getDefaultSharedPreferences(this)
-                .getBoolean("pref_dark_theme", false)) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
             setTheme(R.style.AppThemeNight_NoActionBar);
         }
         super.onCreate(savedInstanceState);
@@ -53,21 +56,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        // On vérifie la connexion internet
-        if(!checkInternet()){
-            // Si pas internet, on met un message
-            displaySnackbar(mainactivityLayout, getString(R.string.no_internet));
-            no_internet = true;
-        }
-
         mWebView = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = mWebView.getSettings();
+        webSettings.setAppCachePath(this.getCacheDir().getPath());
+        webSettings.setAllowFileAccess(true);
+        webSettings.setAppCacheEnabled(true);
         webSettings.setJavaScriptEnabled(true);
         mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(mWebView, url);
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+            @SuppressWarnings("deprecation")
+            @Override
+            public void onReceivedError (WebView view, int errorCode, String description, String failingUrl) {
+                showWebViewError(view, failingUrl);
+            }
+            @TargetApi(android.os.Build.VERSION_CODES.M)
+            @Override
+            public void onReceivedError (WebView view, WebResourceRequest request, WebResourceError error) {
+                // On redirige vers l'ancienne fonction
+                onReceivedError(view, error.getErrorCode(), error.getDescription().toString(), request.getUrl().toString());
+            }
+        });
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setColorSchemeResources(
-                R.color.rouge, R.color.indigo, R.color.lime);
+        swipeRefreshLayout.setColorSchemeResources(R.color.rouge, R.color.indigo, R.color.lime);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -78,42 +95,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
-
-        /* On charge la WebView */
+        /* On affiche la WebView */
         getPage(false);
     }
 
-    protected void getPage(boolean clearCache){
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(mWebView, url);
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                String error = getString(R.string.no_connexion_client);
-                if(no_internet) {
-                    error = getString(R.string.no_internet);
-                }
-                // On affiche la snackbar
-                displaySnackbar(mainactivityLayout, error);
-                // On rend invisible la WebView pour éviter un affichage dégeulasse ;)
-                mWebView.setVisibility(View.GONE);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
-        mWebView.getSettings().setAppCachePath(this.getCacheDir().getPath());
-        mWebView.getSettings().setAppCacheEnabled(true);
-        if(no_internet) {
+    protected void getPage(boolean clearCache) {
+        boolean internet = checkInternet();
+        String url = prepareURL();
+        if(!internet) { // Si on veut d'abord afficher le cache
             mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+        } else {
+            mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+            if(clearCache) {
+                mWebView.clearCache(true);
+            }
         }
-        if(!no_internet && clearCache) {
-            mWebView.clearCache(true);
+        mWebView.loadUrl(url);
+    }
+
+    public void showWebViewError(WebView view, String failUrl) {
+        if(checkInternet()) {
+            String errorDisplay = getString(R.string.no_connexion_client);
+            displaySnackbar(mainactivityLayout, errorDisplay);
         }
-        mWebView.loadUrl(prepareURL());
+        /* Si y'a pas de cache */
+        if(view.getSettings().getCacheMode() != WebSettings.LOAD_NO_CACHE && URL_TO_LOAD.equals(failUrl)) {
+            view.loadData("<p style=\"text-align: center;margin-top: 50px;\">Aucun cache n'a été trouvé :/<br />Vous devez avoir internet.</p>", "text/html; charset=UTF-8", null);
+        }
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     public String prepareURL() {
@@ -130,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         url += "&version=" + getString(R.string.version_app);
         // On ajoute le thème désiré
         url += "&theme=" + theme;
-
+        URL_TO_LOAD = url;
         return url;
     }
 
@@ -139,14 +148,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()) {
+            if(SNACKBARSHOW) { // Si y'avais une snackbar on la supprime
+                snackbar.dismiss();
+            }
             return true;
         } else {
+            displaySnackbar(mainactivityLayout, getString(R.string.no_internet));
             return false;
         }
     }
 
     public void displaySnackbar(View mainactivityLayout, String error) {
-        Snackbar snackbar = Snackbar
+        snackbar = Snackbar
                 .make(mainactivityLayout, error, Snackbar.LENGTH_INDEFINITE)
                 .setAction("Réessayer", new View.OnClickListener() {
                     @Override
@@ -157,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
         snackbar.setActionTextColor(Color.YELLOW);
         snackbar.show();
+        SNACKBARSHOW = true;
     }
 
     @Override

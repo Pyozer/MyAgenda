@@ -29,7 +29,7 @@ public class HttpRequest {
                 return downloadUrl(urls);
             } catch (IOException e) {
                 if(updateActivity != null) {
-                    return updateActivity.getString(R.string.no_connexion_github);
+                    return "error";
                 }
                 return null;
             }
