@@ -1,6 +1,5 @@
 # MyAgenda
 Application Android (privé) pour avoir son emploi du temps.
-Elle est réservé aux étudiants de l'IUT de Laval.
 Cette application vous permet d'avoir l'emplois du temps directement sur son téléphone.
 
 ## Quels sont ses fonctionnalités ?
