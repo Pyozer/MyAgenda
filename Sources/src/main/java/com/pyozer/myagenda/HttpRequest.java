@@ -11,17 +11,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpRequest {
+class HttpRequest {
     private UpdateActivity updateActivity = null;
 
     SharedPreferences preferences;
 
-    public HttpRequest(UpdateActivity updateActivity) {
+    HttpRequest(UpdateActivity updateActivity) {
         this.updateActivity = updateActivity;
         preferences = PreferenceManager.getDefaultSharedPreferences(updateActivity);
     }
 
-    public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
+    class DownloadWebpageTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
@@ -70,13 +70,11 @@ public class HttpRequest {
             conn.setConnectTimeout(Integer.parseInt(ConnectTimeout));
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
-            // Début requete
             conn.connect();
             //int response = conn.getResponseCode();
             is = conn.getInputStream();
 
-            String contentAsString = convertStreamToString(is);
-            return contentAsString;
+            return convertStreamToString(is);
 
         } finally {
             if (is != null) {
@@ -95,7 +93,7 @@ public class HttpRequest {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
-        String line = null;
+        String line;
         try {
             while ((line = reader.readLine()) != null) {
                 sb.append(line + "\n");
@@ -116,7 +114,7 @@ public class HttpRequest {
      * GESTION APRES REQUETE FINI
      * @param result
      */
-    public void onExecuteUpdateActivity(String result) {
+    private void onExecuteUpdateActivity(String result) {
         // On enlève la dialog de chargement
         updateActivity.progressDialog.dismiss();
         // On affiche le dialog pour donner le résultat du check

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Snackbar snackbar;
     private boolean SNACKBARSHOW = false;
     private String URL_TO_LOAD;
+    private boolean NEED_REFRESH = true;
     SharedPreferences preferences;
 
     @Override
@@ -56,10 +57,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.rouge, R.color.indigo, R.color.lime);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(checkInternet()) {
+                    getPage(true, false);
+                } else {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+        });
+
         mWebView = (WebView) findViewById(R.id.webView);
         WebSettings webSettings = mWebView.getSettings();
-        webSettings.setAppCachePath(this.getCacheDir().getPath());
         webSettings.setAllowFileAccess(true);
+        webSettings.setAppCachePath(this.getCacheDir().getPath());
+        webSettings.setAppCacheMaxSize(1024*1024*8);
         webSettings.setAppCacheEnabled(true);
         webSettings.setJavaScriptEnabled(true);
         mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
@@ -69,44 +84,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 super.onPageFinished(mWebView, url);
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
+                if(NEED_REFRESH) {
+                    swipeRefreshLayout.setRefreshing(true);
+                    getPage(false, false);
+                    NEED_REFRESH = false;
+                }
             }
             @SuppressWarnings("deprecation")
             @Override
-            public void onReceivedError (WebView view, int errorCode, String description, String failingUrl) {
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 showWebViewError(view, failingUrl);
             }
             @TargetApi(android.os.Build.VERSION_CODES.M)
             @Override
-            public void onReceivedError (WebView view, WebResourceRequest request, WebResourceError error) {
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 // On redirige vers l'ancienne fonction
                 onReceivedError(view, error.getErrorCode(), error.getDescription().toString(), request.getUrl().toString());
             }
         });
-
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setColorSchemeResources(R.color.rouge, R.color.indigo, R.color.lime);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if(checkInternet()) {
-                    getPage(true);
-                } else {
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            }
-        });
         /* On affiche la WebView */
-        getPage(false);
+        getPage(false, true);
     }
 
-    protected void getPage(boolean clearCache) {
+    protected void getPage(boolean clearCache, boolean load_cache) {
         boolean internet = checkInternet();
         String url = prepareURL();
-        if(!internet) { // Si on veut d'abord afficher le cache
+        if(!internet) { // Si y'a pas internet
             mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-        } else {
+        } else if(load_cache) { // Si on veut charger le cache (tout en gardant l'expiration du cache)
+            mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        } else { // Sinon si on veut simplement charger la page
             mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
-            if(clearCache) {
+            if(clearCache) { // Si on veut supprimer le cache avant de charger la page
                 mWebView.clearCache(true);
             }
         }
@@ -115,8 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void showWebViewError(WebView view, String failUrl) {
         if(checkInternet()) {
-            String errorDisplay = getString(R.string.no_connexion_client);
-            displaySnackbar(mainactivityLayout, errorDisplay);
+            displaySnackbar(mainactivityLayout, getString(R.string.no_connexion_client));
         }
         /* Si y'a pas de cache */
         if(view.getSettings().getCacheMode() != WebSettings.LOAD_NO_CACHE && URL_TO_LOAD.equals(failUrl)) {
