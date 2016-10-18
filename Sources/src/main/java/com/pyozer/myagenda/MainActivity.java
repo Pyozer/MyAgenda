@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private boolean SNACKBARSHOW = false;
     private String URL_TO_LOAD;
     private boolean NEED_REFRESH = true;
-    SharedPreferences preferences;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         mainactivityLayout = findViewById(R.id.mainactivity_layout);
 
@@ -84,7 +86,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 super.onPageFinished(mWebView, url);
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
-                if(NEED_REFRESH) {
+                boolean reloadCache = preferences.getBoolean("pref_cacheReload", true);
+                if(NEED_REFRESH && reloadCache) {
                     swipeRefreshLayout.setRefreshing(true);
                     getPage(false, false);
                     NEED_REFRESH = false;
@@ -134,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public String prepareURL() {
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String depart = preferences.getString("depart", "1");
         String annee = preferences.getString("annee", "1");
         String groupe = preferences.getString("groupe", "A");
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         boolean nightMode = preferences.getBoolean("pref_dark_theme", false);
         String theme = (nightMode) ? "dark" : "light";
 
-        String url = "http://interminale.fr.nf/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
+        String url = "http://jourmagic.fr/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
         // On ajoute la version actuelle
         url += "&version=" + getString(R.string.version_app);
         // On ajoute le thème désiré

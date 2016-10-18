@@ -17,6 +17,7 @@
 
 	<!-- AUTRE -->
     <color name="white">#FFFFFF</color>
+    <color name="lightGrey">#f0f0f0</color>
     <color name="rouge">#F33535</color>
     <color name="indigo">#3F51B5</color>
     <color name="lime">#7ddc39</color>

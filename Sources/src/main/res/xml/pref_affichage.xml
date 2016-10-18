@@ -15,4 +15,10 @@
         android:summary="@string/pref_nightMode"
         android:defaultValue="false" />
 
+    <SwitchPreference
+        android:key="pref_cacheReload"
+        android:title="@string/pref_title_cacheReload"
+        android:summary="@string/pref_cacheReload"
+        android:defaultValue="true" />
+
 </PreferenceScreen>

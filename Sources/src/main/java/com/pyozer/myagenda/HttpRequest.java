@@ -1,8 +1,7 @@
 package com.pyozer.myagenda;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
+import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,12 +12,10 @@ import java.net.URL;
 
 class HttpRequest {
     private UpdateActivity updateActivity = null;
-
-    SharedPreferences preferences;
+    public boolean changeLog = false;
 
     HttpRequest(UpdateActivity updateActivity) {
         this.updateActivity = updateActivity;
-        preferences = PreferenceManager.getDefaultSharedPreferences(updateActivity);
     }
 
     class DownloadWebpageTask extends AsyncTask<String, Void, String> {
@@ -38,7 +35,7 @@ class HttpRequest {
         @Override
         protected void onPreExecute() {
             if (updateActivity != null) {
-                updateActivity.checkUpdate.setEnabled(false);
+                updateActivity.swipeRefreshLayout.setRefreshing(true);
             }
         }
         // onPostExecute displays the results of the AsyncTask.
@@ -115,11 +112,12 @@ class HttpRequest {
      * @param result
      */
     private void onExecuteUpdateActivity(String result) {
-        // On enlève la dialog de chargement
-        updateActivity.progressDialog.dismiss();
-        // On affiche le dialog pour donner le résultat du check
-        updateActivity.showAlertDialog(result);
-        // On réactive le bouton pour check les majs
-        updateActivity.checkUpdate.setEnabled(true);
+        if(!changeLog) {
+            updateActivity.showResponse(result);
+        } else {
+            updateActivity.showResponseChangeLog(result);
+        }
+        updateActivity.swipeRefreshLayout.setRefreshing(false);
+
     }
 }

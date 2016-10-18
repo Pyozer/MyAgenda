@@ -5,7 +5,7 @@ android {
         debug {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-            storeFile file('C:/Users/Thecr/.android/debug.keystore')
+            storeFile file('G:/AndroidStudio/.android/debug.keystore')
             storePassword 'android'
         }
     }
@@ -15,13 +15,16 @@ android {
         applicationId "com.pyozer.myagenda"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 29
-        versionName "2.0.9"
+        versionCode 210
+        versionName "2.1.0"
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
         }
     }
 }
@@ -32,4 +35,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:cardview-v7:24.2.1'
 }

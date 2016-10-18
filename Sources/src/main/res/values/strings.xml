@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Agenda</string>
-    <string name="version_app">2.0.9</string>
-    <string name="version_app_menu">v2.0.9</string>
+    <string name="version_app">2.1.0</string>
+    <string name="version_app_menu">v2.1.0</string>
 
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
     <string name="navigation_drawer_close">Fermer le menu de navigation</string>
@@ -59,18 +59,18 @@
     <string name="pref_nbWeeks">1</string>
     <string name="pref_title_nightMode">Mode nuit</string>
     <string name="pref_nightMode">Transforme l\'application avec des couleurs plus sombre.</string>
+    <string name="pref_title_cacheReload">Rafraichir le cache</string>
+    <string name="pref_cacheReload">Permet de rafraichir le cache à chaque fois, même si celui-ci n\'est pas expiré.</string>
 
     <string name="pref_ringtone_silent">null</string>
 
     <!-- Update -->
-    <string name="update_check_text">Vérifier les mises à jours</string>
-    <string name="update_check_noupdate">Vous avez la dernière version de l\'application :D</string>
+    <string name="update_checked_noupdate">Vous utilisez la dernière version :D</string>
+    <string name="update_checked_newupdate">Une version plus récente existe !</string>
     <string name="update_download_last">Télécharger la dernière version</string>
-    <string name="update_text_title">Vérifiez si vous possédez la dernière version de l\'application.</string>
-
-    <string name="update_dialog_title">Mise à jour</string>
-    <string name="update_dialog_newupdate">Une version plus récente existe !</string>
-    <string name="update_dialog_download">Télécharger</string>
+    <string name="update_actual_version">Version actuelle:</string>
+    <string name="update_version">Version</string>
+    <string name="update_changelog_default">Erreur</string>
 
     <!-- Erreurs -->
     <string name="erreur">Erreur</string>

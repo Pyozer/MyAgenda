@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="2dp"
+    tools:showIn="@layout/activity_update">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- TEXTE DE LA REPONSE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/update_checked_noupdate"
+            android:id="@+id/update_checked"
+            android:textAlignment="center"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="25dp"
+            android:layout_centerHorizontal="true" />
+
+        <!-- BOUTON POUR DOWNLOAD LA NOUVELLE VERSION -->
+        <Button
+            android:id="@+id/update_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/update_checked"
+            android:text="@string/update_download_last"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@drawable/custom_button"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+
+        <!-- TEXTE DE LA VERSION INSTALLEE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/update_actual_version"
+            android:id="@+id/version_install"
+            android:textAlignment="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="12dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/update_download"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
