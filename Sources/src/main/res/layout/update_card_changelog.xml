@@ -10,7 +10,7 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="2dp"
     tools:showIn="@layout/activity_update"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <RelativeLayout
         android:layout_width="match_parent"
