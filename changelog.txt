@@ -1,1 +1,3 @@
-﻿- Modification du serveur\r\n- Modification de la page Mise à jour\r\n- Légère modification du logo
+﻿- Modification du serveur
+- Modification de la page Mise à jour
+- Légère modification du logo
