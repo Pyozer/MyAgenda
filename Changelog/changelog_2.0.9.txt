@@ -1,0 +1,2 @@
+﻿- Gestion du cache amélioré
+- Bug du scroll dans A propos réglé
