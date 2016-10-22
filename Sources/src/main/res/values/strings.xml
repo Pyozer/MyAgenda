@@ -73,7 +73,7 @@
     <string name="update_actual_version">Version actuelle:</string>
     <string name="update_last_version">Dernière version:</string>
     <string name="update_version">Version</string>
-    <string name="update_changelog">Changelog</string>
+    <string name="update_changelog"><font size="18"><b>Changelog</b></font></string>
     <string name="update_changelog_default">…</string>
 
     <!-- Erreurs -->
