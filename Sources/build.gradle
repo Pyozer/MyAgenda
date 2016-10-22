@@ -5,7 +5,7 @@ android {
         debug {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-            storeFile file('G:/AndroidStudio/.android/debug.keystore')
+            storeFile file('F:/AndroidStudio/.android/debug.keystore')
             storePassword 'android'
         }
     }
@@ -15,8 +15,8 @@ android {
         applicationId "com.pyozer.myagenda"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 210
-        versionName "2.1.0"
+        versionCode 211
+        versionName "2.1.1"
     }
     buildTypes {
         release {

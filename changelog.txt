@@ -1,5 +1,6 @@
 ﻿Version 2.1.1:
-- Intégration des STAPS (Le mans)
+- Intégration des STAPS (Le Mans)
+- Petite modification de la page Mise à jour
 
 Version 2.1.0:
 - Modification du serveur

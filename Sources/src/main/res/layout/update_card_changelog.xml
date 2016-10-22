@@ -9,8 +9,7 @@
     android:layout_marginBottom="10dp"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="2dp"
-    tools:showIn="@layout/activity_update"
-    android:visibility="gone">
+    tools:showIn="@layout/activity_update">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,12 +19,11 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp">
 
-        <!-- TEXTE DE LA REPONSE -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/update_actual_version"
+            android:text="@string/update_changelog"
             android:id="@+id/changeLog_version"
             android:textAlignment="viewStart"
             android:layout_marginTop="12dp"

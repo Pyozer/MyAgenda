@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,30 +14,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.util.Objects;
 
 public class UpdateActivity extends AppCompatActivity {
 
     protected TextView changelog;
-    protected TextView changelog_version;
     protected TextView version_install;
+    protected TextView version_new;
     protected TextView update_checked;
+
     protected Button update_download;
+
     protected SwipeRefreshLayout swipeRefreshLayout;
-    private String version2download;
 
     protected View update_layout;
-    protected HttpRequest HttpRequest;
 
     private Snackbar snackbar;
     private boolean SNACKBARSHOW = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this)
-                .getBoolean("pref_dark_theme", false)) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
             setTheme(R.style.AppThemeNight);
         }
         super.onCreate(savedInstanceState);
@@ -49,11 +46,9 @@ public class UpdateActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        HttpRequest = new HttpRequest(this);
-
         changelog = (TextView) findViewById(R.id.changeLog);
-        changelog_version = (TextView) findViewById(R.id.changeLog_version);
         version_install = (TextView) findViewById(R.id.version_install);
+        version_new = (TextView) findViewById(R.id.version_new);
         update_checked = (TextView) findViewById(R.id.update_checked);
         update_download = (Button) findViewById(R.id.update_download);
         // On affiche la version actuelle de l'application
@@ -68,14 +63,17 @@ public class UpdateActivity extends AppCompatActivity {
             public void onRefresh() {
                 if(checkInternet()) {
                     StartCheckUpdate();
+                    // On charge le changelog
+                    StartCheckChangeLog();
                 } else {
                     swipeRefreshLayout.setRefreshing(false);
                 }
             }
         });
 
-        // On vérifie la connexion internet
         StartCheckUpdate();
+        // On charge le changelog
+        StartCheckChangeLog();
     }
 
     // Permet de vérifier la connexion internet
@@ -112,17 +110,17 @@ public class UpdateActivity extends AppCompatActivity {
     protected void StartCheckUpdate() {
         if(checkInternet()) {
             String url = "https://raw.githubusercontent.com/Pyozer/MyAgenda/master/last_version.txt";
-            HttpRequest.changeLog = false;
-            HttpRequest.new DownloadWebpageTask().execute(url, "4000", "4000");
+            HttpRequest HttpRequest = new HttpRequest(this, false);
+            HttpRequest.new DownloadWebpageTask().execute(url, "5000", "5000");
         }
     }
 
     // On prépare l'url avant la requete
-    protected void StartCheckChangeLog(String versionToGet) {
+    protected void StartCheckChangeLog() {
         if(checkInternet()) {
             String url = "https://raw.githubusercontent.com/Pyozer/MyAgenda/master/changelog.txt";
-            HttpRequest.changeLog = true;
-            HttpRequest.new DownloadWebpageTask().execute(url, "4000", "4000");
+            HttpRequest HttpRequest = new HttpRequest(this, true);
+            HttpRequest.new DownloadWebpageTask().execute(url, "5000", "5000");
         }
     }
 
@@ -131,15 +129,22 @@ public class UpdateActivity extends AppCompatActivity {
      */
     public void showResponse(String last_version) {
 
-        version2download = last_version.trim();
+        final String version2download = last_version.trim();
         String actual_version = getString(R.string.version_app);
+
+        version_new.setVisibility(View.GONE);
+        update_download.setVisibility(View.GONE);
 
         if(actual_version.equals(version2download)) { // Si pas de nouvelle version
             update_checked.setText(getString(R.string.update_checked_noupdate));
         } else if(Objects.equals(version2download, "error")){ // Si erreur lors de la récupération via github
             update_checked.setText(getString(R.string.no_connexion_github));
-        } else { // Si nouvelle version
+        } else { // Si une nouvelle version
             update_checked.setText(getString(R.string.update_checked_newupdate));
+
+            String lastVersionDisplay = getString(R.string.update_last_version) + " " + version2download;
+            version_new.setVisibility(View.VISIBLE);
+            version_new.setText(lastVersionDisplay);
 
             update_download.setVisibility(View.VISIBLE);
             update_download.setOnClickListener(new View.OnClickListener() {
@@ -150,16 +155,12 @@ public class UpdateActivity extends AppCompatActivity {
                 }
             });
         }
-        // On charge le changelog
-        StartCheckChangeLog(version2download);
     }
 
     /**
      * Affiche la CardView du changelog
      */
     public void showResponseChangeLog(String change) {
-        findViewById(R.id.card_view_changelog).setVisibility(View.VISIBLE);
-        changelog_version.setText("Changelog (" + version2download + ")");
         changelog.setText(change);
     }
 

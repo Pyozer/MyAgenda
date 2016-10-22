@@ -1,8 +1,6 @@
 package com.pyozer.myagenda;
 
 import android.os.AsyncTask;
-import android.view.View;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,15 +9,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 class HttpRequest {
-    private UpdateActivity updateActivity = null;
-    public boolean changeLog = false;
 
-    HttpRequest(UpdateActivity updateActivity) {
+    private UpdateActivity updateActivity = null;
+    private boolean wantChangelog = false;
+
+    HttpRequest(UpdateActivity updateActivity, boolean wantChangelogParams) {
         this.updateActivity = updateActivity;
+        this.wantChangelog = wantChangelogParams;
     }
 
     class DownloadWebpageTask extends AsyncTask<String, Void, String> {
-
         @Override
         protected String doInBackground(String... urls) {
             try {
@@ -49,8 +48,8 @@ class HttpRequest {
 
     /**
      * On effectue la requête et récupère le contenu
-     * @param params
-     * @return
+     * @param params Paramètres, URL, timeout
+     * @return résultat requête
      * @throws IOException
      */
     private String downloadUrl(String... params) throws IOException {
@@ -82,8 +81,8 @@ class HttpRequest {
 
     /**
      * Convertion du InputStream en String.
-     * @param is
-     * @return
+     * @param is InputStream à convertir
+     * @return string
      * @throws IOException
      */
     private String convertStreamToString(InputStream is) {
@@ -109,10 +108,10 @@ class HttpRequest {
 
     /**
      * GESTION APRES REQUETE FINI
-     * @param result
+     * @param result resultat de la requête
      */
     private void onExecuteUpdateActivity(String result) {
-        if(!changeLog) {
+        if(!wantChangelog) {
             updateActivity.showResponse(result);
         } else {
             updateActivity.showResponseChangeLog(result);
