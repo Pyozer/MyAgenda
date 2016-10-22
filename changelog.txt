@@ -1,0 +1,11 @@
+﻿Version 2.1.1:
+- Intégration des STAPS (Le mans)
+
+Version 2.1.0:
+- Modification du serveur
+- Modification de la page Mise à jour
+- Légère modification du logo
+
+Version 2.0.9:
+- Gestion du cache amélioré
+- Bug du scroll dans A propos réglé

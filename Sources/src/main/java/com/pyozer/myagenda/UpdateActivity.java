@@ -120,7 +120,7 @@ public class UpdateActivity extends AppCompatActivity {
     // On prépare l'url avant la requete
     protected void StartCheckChangeLog(String versionToGet) {
         if(checkInternet()) {
-            String url = "https://raw.githubusercontent.com/Pyozer/MyAgenda/master/Changelog/changelog_" + versionToGet + ".txt";
+            String url = "https://raw.githubusercontent.com/Pyozer/MyAgenda/master/changelog.txt";
             HttpRequest.changeLog = true;
             HttpRequest.new DownloadWebpageTask().execute(url, "4000", "4000");
         }
@@ -140,8 +140,6 @@ public class UpdateActivity extends AppCompatActivity {
             update_checked.setText(getString(R.string.no_connexion_github));
         } else { // Si nouvelle version
             update_checked.setText(getString(R.string.update_checked_newupdate));
-            // On charge le changelog
-            StartCheckChangeLog(version2download);
 
             update_download.setVisibility(View.VISIBLE);
             update_download.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +150,8 @@ public class UpdateActivity extends AppCompatActivity {
                 }
             });
         }
+        // On charge le changelog
+        StartCheckChangeLog(version2download);
     }
 
     /**

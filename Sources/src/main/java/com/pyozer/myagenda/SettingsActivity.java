@@ -227,6 +227,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             CharSequence[] titles_tc2 = {"TP 211", "TP 212", "TP 221", "TP 222", "TP 223", "TP 231", "TP 232", "TP 241", "TP 242", "TP 243"};
             CharSequence[] values_tc2 = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
+            CharSequence[] titles_staps1 = {"TP A1", "TP A2", "TP B2", "TP B3", "TP C4", "TP C5", "TP D5", "TP D6", "TP E7", "TP E8", "TP F8", "TP F9", "TP G10", "TP G11", "TP H11", "TP H12", "TP I13", "TP I14"};
+            CharSequence[] values_staps1 = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"};
+
+            CharSequence[] titles_staps2 = {"GP A1", "GP A2", "GP B3", "GP B4", "GP C5", "GP C6", "GP D7", "GP D8"};
+            CharSequence[] values_staps2 = {"A", "B", "C", "D", "E", "F", "G", "H"};
+
             if(Objects.equals(depart, "1") || (Objects.equals(depart, "2") && Objects.equals(annee, "2"))) { // Si Info
                 group.setEntries(titles_info_mm2);
                 group.setEntryValues(values_info_mm2);
@@ -242,6 +248,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             } else if(Objects.equals(depart, "4") && Objects.equals(annee, "2"))  {
                 group.setEntries(titles_tc2);
                 group.setEntryValues(values_tc2);
+            } else if((Objects.equals(depart, "5") && Objects.equals(annee, "1")))  {
+                group.setEntries(titles_staps1);
+                group.setEntryValues(values_staps1);
+            } else if((Objects.equals(depart, "5") && Objects.equals(annee, "2")))  {
+                group.setEntries(titles_staps2);
+                group.setEntryValues(values_staps2);
             } else {
                 group.setEntries(titles_tc2);
                 group.setEntryValues(values_tc2);

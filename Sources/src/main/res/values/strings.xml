@@ -24,12 +24,14 @@
         <item>M.M.I</item>
         <item>Génie biologie</item>
         <item>TC</item>
+        <item>STAPS (Le mans)</item>
     </string-array>
     <string-array name="pref_depart_values">
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
+        <item>5</item>
     </string-array>
 
     <string-array name="pref_group_titles_info_mm2">
@@ -83,7 +85,7 @@
         <font size="18"><b>Qu\'est-ce que c\'est ?</b></font>
         "\n\n"
 
-        "Cette application est reliée à l\'agenda de l\'IUT de Laval présent sur l\'ENT.\n"
+        "Cette application est reliée à l\'agenda de l\'IUT de Laval (Et STAPS de l\'Université du Mans) présent sur l\'ENT.\n"
         "Elle vous permet d\'avoir directement accès à votre agenda via votre téléphone ou tablette sans avoir besoin de se connecter à l\'ENT."
         "\n\n"
         <font size="18"><b>Comment ça fonctionne ?</b></font>
