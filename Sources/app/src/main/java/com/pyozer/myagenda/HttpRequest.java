@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-class HttpRequest {
+public class HttpRequest {
 
     private UpdateActivity updateActivity = null;
     private boolean wantChangelog = false;
