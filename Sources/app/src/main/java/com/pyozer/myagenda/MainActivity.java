@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -54,8 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -82,13 +82,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
+            public void onPageStarted(WebView view, String url, Bitmap bitmap) {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+
+            @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(mWebView, url);
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
                 boolean reloadCache = preferences.getBoolean("pref_cacheReload", true);
                 if(NEED_REFRESH && reloadCache) {
-                    swipeRefreshLayout.setRefreshing(true);
                     getPage(false, false);
                     NEED_REFRESH = false;
                 }
