@@ -1,4 +1,8 @@
-﻿Version 2.1.1:
+﻿Version 2.1.2:
+- Ajout de Google Analytics
+- "Chargement" du cache désormais invisible
+
+Version 2.1.1:
 - Intégration des STAPS (Le Mans)
 - Affichage du Changelog
 

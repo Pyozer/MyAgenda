@@ -31,7 +31,7 @@ public class UpdateActivity extends AppCompatActivity {
     protected View update_layout;
 
     private Snackbar snackbar;
-    private boolean SNACKBARSHOW = false;
+    private boolean SNACK_SHOW = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +40,7 @@ public class UpdateActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Show the Up button in the action bar.
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setupActionBar();
 
         changelog = (TextView) findViewById(R.id.changeLog);
         version_install = (TextView) findViewById(R.id.version_install);
@@ -81,7 +77,7 @@ public class UpdateActivity extends AppCompatActivity {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()) {
-            if(SNACKBARSHOW) { // Si y'avais une snackbar on la supprime
+            if(SNACK_SHOW) { // Si y'avais une snackbar on la supprime
                 snackbar.dismiss();
             }
             return true;
@@ -103,7 +99,7 @@ public class UpdateActivity extends AppCompatActivity {
                 });
         snackbar.setActionTextColor(Color.YELLOW);
         snackbar.show();
-        SNACKBARSHOW = true;
+        SNACK_SHOW = true;
     }
 
     // On prépare l'url avant la requete
@@ -164,4 +160,14 @@ public class UpdateActivity extends AppCompatActivity {
         changelog.setText(change);
     }
 
+    /**
+     * Set up the {@link android.app.ActionBar}, if the API is available.
+     */
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 }

@@ -25,6 +25,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String URL_TO_LOAD;
     private boolean NEED_REFRESH = true;
     private SharedPreferences preferences;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -83,7 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap bitmap) {
-                swipeRefreshLayout.setRefreshing(true);
+                if(!NEED_REFRESH) { // Si c'est pas le premier
+                    swipeRefreshLayout.setRefreshing(true);
+                }
             }
 
             @Override
@@ -92,8 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 swipeRefreshLayout.setRefreshing(false);
                 boolean reloadCache = preferences.getBoolean("pref_cacheReload", true);
                 if(NEED_REFRESH && reloadCache) {
-                    getPage(false, false);
                     NEED_REFRESH = false;
+                    getPage(false, false);
                 }
             }
             @SuppressWarnings("deprecation")
@@ -110,6 +118,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         /* On affiche la WebView */
         getPage(false, true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTracker.setScreenName("Accueil");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     protected void getPage(boolean clearCache, boolean load_cache) {
@@ -203,10 +218,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_about) {
+            mTracker.send(new HitBuilders.EventBuilder()
+                    .setCategory("NavDrawer")
+                    .setAction("About")
+                    .build());
             startActivity(new Intent(MainActivity.this, AboutActivity.class));
         } else if (id == R.id.nav_settings) {
+            mTracker.send(new HitBuilders.EventBuilder()
+                    .setCategory("NavDrawer")
+                    .setAction("Settings")
+                    .build());
             startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         } else if (id == R.id.nav_update) {
+            mTracker.send(new HitBuilders.EventBuilder()
+                    .setCategory("NavDrawer")
+                    .setAction("Update")
+                    .build());
             startActivity(new Intent(MainActivity.this, UpdateActivity.class));
         }
 
