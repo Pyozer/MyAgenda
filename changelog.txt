@@ -1,5 +1,11 @@
 ﻿<html>
-	<head></head>
+	<head>
+		<style>
+			li {
+				margin-left: 10px!important;
+			}
+		</style>
+	</head>
 	<body>
 		Version 2.1.2:
 		<ul>
