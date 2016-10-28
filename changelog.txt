@@ -1,16 +1,29 @@
-﻿Version 2.1.2:
-- Ajout de Google Analytics
-- "Chargement" du cache désormais invisible
+﻿<html>
+	<head></head>
+	<body>
+		Version 2.1.2:
+		<ul>
+			<li>Ajout de Google Analytics</li>
+			<li>"Chargement" du cache désormais invisible</li>
+		</ul>
 
-Version 2.1.1:
-- Intégration des STAPS (Le Mans)
-- Affichage du Changelog
+		Version 2.1.1:
+		<ul>
+			<li>Intégration des STAPS (Le Mans)</li>
+			<li>Affichage du Changelog</li>
+		</ul>
 
-Version 2.1.0:
-- Modification du serveur
-- Modification de la page Mise à jour
-- Légère modification du logo
+		Version 2.1.0:
+		<ul>
+			<li>Modification du serveur</li>
+			<li>Modification de la page Mise à jour</li>
+			<li>Légère modification du logo</li>
+		</ul>
 
-Version 2.0.9:
-- Gestion du cache amélioré
-- Bug du scroll dans A propos réglé
+		Version 2.0.9:
+		<ul>
+			<li>Gestion du cache amélioré</li>
+			<li>Bug du scroll dans A propos réglé</li>
+		</ul>
+	</body>
+</html>
