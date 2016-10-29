@@ -5,11 +5,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
 
         <item name="android:colorBackground">@color/lightGrey</item>
 
         <item name="themedMenuGroupDrawable">@drawable/ic_group_black_24dp</item>
         <item name="themedMenuVisibilityDrawable">@drawable/ic_visibility_black_24dp</item>
+        <item name="themedAboutInfoDrawable">@drawable/ic_info_outline_black_24dp</item>
     </style>
     <!-- ################# -->
     <!-- #   THEME NUIT  # -->
@@ -23,6 +26,7 @@
 
         <item name="themedMenuGroupDrawable">@drawable/ic_group_white_24dp</item>
         <item name="themedMenuVisibilityDrawable">@drawable/ic_visibility_white_24dp</item>
+        <item name="themedAboutInfoDrawable">@drawable/ic_info_outline_white_24dp</item>
     </style>
 
     <style name="AppThemeNight.NoActionBar" parent="AppThemeNight">
@@ -42,9 +46,21 @@
     <style name="Widget.CardContent" parent="android:Widget">
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">16dp</item>
-        <item name="android:paddingTop">24dp</item>
-        <item name="android:paddingBottom">24dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
         <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Widget.CardContentSmall" parent="Widget.CardContent">
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">18dp</item>
+    </style>
+
+    <style name="Widget.CardContentRecycler" parent="Widget.CardContent">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
     </style>
 
     <style name="AppThemeButton" parent="Theme.AppCompat">

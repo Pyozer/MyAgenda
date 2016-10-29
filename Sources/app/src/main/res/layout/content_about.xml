@@ -40,7 +40,6 @@
                     android:text="@string/about_whatIsIt_text" />
 
             </LinearLayout>
-
         </android.support.v7.widget.CardView>
 
         <!-- Comment ça fonctionne ? -->
@@ -69,7 +68,6 @@
                     android:text="@string/about_howItsWorks_text" />
 
             </LinearLayout>
-
         </android.support.v7.widget.CardView>
 
         <!-- Auteur -->
@@ -98,7 +96,64 @@
                     android:text="@string/about_who_text" />
 
             </LinearLayout>
+        </android.support.v7.widget.CardView>
 
+        <!-- Me -->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_margin"
+            android:layout_marginLeft="@dimen/card_margin"
+            android:layout_marginRight="@dimen/card_margin">
+
+            <LinearLayout
+                style="@style/Widget.CardContentRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- A RecyclerView with some commonly used attributes -->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:scrollbars="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <!-- Version -->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_margin"
+            android:layout_marginLeft="@dimen/card_margin"
+            android:layout_marginRight="@dimen/card_margin">
+
+            <LinearLayout
+                style="@style/Widget.CardContentSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/about_version_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="?attr/themedAboutInfoDrawable" />
+
+                    <TextView
+                        android:id="@+id/about_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="45dp"
+                        android:text="@string/update_version"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+                </RelativeLayout>
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
     </LinearLayout>

@@ -4,6 +4,14 @@
 		</style>
 	</head>
 	<body>
+		<p>Version 2.1.3:</p>
+		<ul>
+			<li>Amélioration de la page A propos</li>
+			<li>Amélioration de la page Mise à jour</li>
+			<li>Légère modification des couleurs</li>
+			<li>Mise en forme du Changelog</li>
+		</ul>
+
 		<p>Version 2.1.2:</p>
 		<ul>
 			<li>Ajout de Google Analytics</li>

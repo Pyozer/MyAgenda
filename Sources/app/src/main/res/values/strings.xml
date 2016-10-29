@@ -66,9 +66,9 @@
     <string name="pref_ringtone_silent">null</string>
 
     <!-- Update -->
-    <string name="update_checked_noupdate">Vous avez la dernière version</string>
-    <string name="update_checked_newupdate">Une version plus récente existe !</string>
-    <string name="update_download_last">Télécharger la dernière version</string>
+    <string name="update_checked_noupdate">Vous avez la dernière version.</string>
+    <string name="update_checked_newupdate">Mise à jour disponible !</string>
+    <string name="update_download_last">Télécharger la Mise à jour</string>
     <string name="update_actual_version">Version actuelle:</string>
     <string name="update_last_version">Dernière version:</string>
     <string name="update_version">Version</string>
