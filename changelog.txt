@@ -1,32 +1,29 @@
-﻿<html>
-	<head>
-		<style>
-			li {
-				margin-left: 10px!important;
-			}
+			p { margin-bottom: 0; }
+			ul { margin-top: 0; }
+			li { margin-left: -20px; }
 		</style>
 	</head>
 	<body>
-		Version 2.1.2:
+		<p>Version 2.1.2:</p>
 		<ul>
 			<li>Ajout de Google Analytics</li>
 			<li>"Chargement" du cache désormais invisible</li>
 		</ul>
-
-		Version 2.1.1:
+		
+		<p>Version 2.1.1:</p>
 		<ul>
 			<li>Intégration des STAPS (Le Mans)</li>
 			<li>Affichage du Changelog</li>
 		</ul>
 
-		Version 2.1.0:
+		<p>Version 2.1.0:</p>
 		<ul>
 			<li>Modification du serveur</li>
 			<li>Modification de la page Mise à jour</li>
 			<li>Légère modification du logo</li>
 		</ul>
 
-		Version 2.0.9:
+		<p>Version 2.0.9:</p>
 		<ul>
 			<li>Gestion du cache amélioré</li>
 			<li>Bug du scroll dans A propos réglé</li>

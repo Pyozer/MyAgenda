@@ -1,7 +1,9 @@
 package com.pyozer.myagenda;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -13,18 +15,22 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import java.util.Objects;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    protected TextView changelog;
     protected TextView version_install;
     protected TextView version_new;
     protected TextView update_checked;
-
     protected Button update_download;
+    protected WebView webView_ChangeLog;
 
     protected SwipeRefreshLayout swipeRefreshLayout;
 
@@ -42,13 +48,14 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
         setupActionBar();
 
-        changelog = (TextView) findViewById(R.id.changeLog);
-        version_install = (TextView) findViewById(R.id.version_install);
         version_new = (TextView) findViewById(R.id.version_new);
         update_checked = (TextView) findViewById(R.id.update_checked);
         update_download = (Button) findViewById(R.id.update_download);
         // On affiche la version actuelle de l'application
+        version_install = (TextView) findViewById(R.id.version_install);
         version_install.setText(getString(R.string.update_actual_version) + " " + getString(R.string.version_app));
+
+        webView_ChangeLog = (WebView) findViewById(R.id.webView_ChangeLog);
 
         update_layout = findViewById(R.id.update_layout);
 
@@ -157,7 +164,16 @@ public class UpdateActivity extends AppCompatActivity {
      * Affiche la CardView du changelog
      */
     public void showResponseChangeLog(String change) {
-        changelog.setText(change);
+        webView_ChangeLog.setBackgroundColor(Color.TRANSPARENT);
+        String finalChangelog;
+        finalChangelog = "<html><head><style>body { color: ";
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
+            finalChangelog += "#d0d0d0;";
+        } else {
+            finalChangelog += "#555555;";
+        }
+        finalChangelog += " }" + change;
+        webView_ChangeLog.loadData(finalChangelog, "text/html; charset=UTF-8", null);
     }
 
     /**

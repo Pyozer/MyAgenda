@@ -42,11 +42,9 @@ public class AboutActivity extends AppCompatActivity {
 
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Application Android MyAgenda");
-        //emailIntent.putExtra(Intent.EXTRA_TEXT, "Saisissez votre message ici");
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Envoyer via..."));
-            finish();
         } catch (android.content.ActivityNotFoundException ex) {
             Snackbar snackbar = Snackbar.make(view, "Il n'y a aucun client mail installé.", Snackbar.LENGTH_LONG);
             snackbar.show();
