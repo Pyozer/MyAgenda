@@ -125,6 +125,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         mTracker.setScreenName("Accueil");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // Stats des département
+        String depart = preferences.getString("depart", "1");
+        String annee = preferences.getString("annee", "1");
+        String[] departName = {"Informatique", "MMI", "Génie biologie", "TC", "STAPS"};
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory(departName[Integer.parseInt(depart)])
+                .setAction(annee)
+                .build());
     }
 
     protected void getPage(boolean clearCache, boolean load_cache) {
