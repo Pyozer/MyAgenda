@@ -1,2 +1,0 @@
-﻿- Intégration des STAPS (Le Mans)
-- Affichage du Changelog

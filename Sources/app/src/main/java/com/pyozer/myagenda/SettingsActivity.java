@@ -212,14 +212,20 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
 
         protected ListPreference setPreferenceValues(String depart, String annee, ListPreference group) {
-            CharSequence[] titles_info_mm2 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D"};
-            CharSequence[] values_info_mm2 = {"A", "B", "C", "D"};
+            CharSequence[] titles_info1 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D"};
+            CharSequence[] values_info1 = {"A", "B", "C", "D"};
+
+            CharSequence[] titles_mmi2 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D", "S4 - Grp ALT", "S4 - Grp A PID", "S4 - Grp B PP", "S4 - Grp C PCAG", "S4 - Grp D PCAG"};
+            CharSequence[] values_mmi2 = {"A", "B", "C", "D", "ALT", "APID", "BPP", "CPCAG", "DPCAG"};
+
+            CharSequence[] titles_info2 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D", "S4 - Grp A IPLP", "S4 - Grp B IPLP", "S4 - Grp A PEL", "S4 - Grp B PEL"};
+            CharSequence[] values_info2 = {"A", "B", "C", "D", "AI", "BI", "AP", "BP"};
 
             CharSequence[] titles_mmi1_gb1 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D", "Groupe E", "Groupe F"};
             CharSequence[] values_mmi1_gb1 = {"A", "B", "C", "D", "E", "F"};
 
-            CharSequence[] titles_gb2 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D", "Groupe E"};
-            CharSequence[] values_gb2 = {"A", "B", "C", "D", "E"};
+            CharSequence[] titles_gb2 = {"Groupe A", "Groupe B", "Groupe C", "Groupe D", "Groupe E", "IPLP 1", "IPLP 2", "IPLP 3", "PEL 1", "PEL 2"};
+            CharSequence[] values_gb2 = {"A", "B", "C", "D", "E", "IPLP1", "IPLP2", "IPLP3", "PEL1", "PEL2"};
 
             CharSequence[] titles_tc1 = {"TP 111", "TP 112", "TP 121", "TP 122", "TP 123", "TP 131", "TP 132", "TP 141", "TP 142"};
             CharSequence[] values_tc1 = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
@@ -233,25 +239,31 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             CharSequence[] titles_staps2 = {"GP A1", "GP A2", "GP B3", "GP B4", "GP C5", "GP C6", "GP D7", "GP D8"};
             CharSequence[] values_staps2 = {"A", "B", "C", "D", "E", "F", "G", "H"};
 
-            if(Objects.equals(depart, "1") || (Objects.equals(depart, "2") && Objects.equals(annee, "2"))) { // Si Info
-                group.setEntries(titles_info_mm2);
-                group.setEntryValues(values_info_mm2);
-            } else if((Objects.equals(depart, "2") && Objects.equals(annee, "1")) || (Objects.equals(depart, "3") && Objects.equals(annee, "1")))  {
+            if(Objects.equals(depart, "1") && Objects.equals(annee, "1")) { // Si Info1
+                group.setEntries(titles_info1);
+                group.setEntryValues(values_info1);
+            } else if(Objects.equals(depart, "2") && Objects.equals(annee, "2")) { // Si MMI2
+                group.setEntries(titles_mmi2);
+                group.setEntryValues(values_mmi2);
+            } else if(Objects.equals(depart, "1") && Objects.equals(annee, "2")) { // Si Info2
+                group.setEntries(titles_info2);
+                group.setEntryValues(values_info2);
+            } else if((Objects.equals(depart, "2") && Objects.equals(annee, "1")) || (Objects.equals(depart, "3") && Objects.equals(annee, "1")))  { // Si MMI1 ou GB1
                 group.setEntries(titles_mmi1_gb1);
                 group.setEntryValues(values_mmi1_gb1);
-            } else if((Objects.equals(depart, "3") && Objects.equals(annee, "2")))  {
+            } else if((Objects.equals(depart, "3") && Objects.equals(annee, "2")))  { // Si GB2
                 group.setEntries(titles_gb2);
                 group.setEntryValues(values_gb2);
-            } else if(Objects.equals(depart, "4") && Objects.equals(annee, "1"))  {
+            } else if(Objects.equals(depart, "4") && Objects.equals(annee, "1"))  { //Si TC 1
                 group.setEntries(titles_tc1);
                 group.setEntryValues(values_tc1);
-            } else if(Objects.equals(depart, "4") && Objects.equals(annee, "2"))  {
+            } else if(Objects.equals(depart, "4") && Objects.equals(annee, "2"))  { // Si tc 2
                 group.setEntries(titles_tc2);
                 group.setEntryValues(values_tc2);
-            } else if((Objects.equals(depart, "5") && Objects.equals(annee, "1")))  {
+            } else if((Objects.equals(depart, "5") && Objects.equals(annee, "1")))  { //Si staps 1
                 group.setEntries(titles_staps1);
                 group.setEntryValues(values_staps1);
-            } else if((Objects.equals(depart, "5") && Objects.equals(annee, "2")))  {
+            } else if((Objects.equals(depart, "5") && Objects.equals(annee, "2")))  { //Si staps 2
                 group.setEntries(titles_staps2);
                 group.setEntryValues(values_staps2);
             } else {

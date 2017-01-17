@@ -1,3 +1,0 @@
-﻿- Modification du serveur
-- Modification de la page Mise à jour
-- Légère modification du logo
