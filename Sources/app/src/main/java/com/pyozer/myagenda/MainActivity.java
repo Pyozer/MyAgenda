@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String annee = preferences.getString("annee", "1");
         String[] departName = {"Informatique", "MMI", "Génie biologie", "TC", "STAPS"};
         mTracker.send(new HitBuilders.EventBuilder()
-                .setCategory(departName[Integer.parseInt(depart)])
+                .setCategory(departName[Integer.parseInt(depart) - 1])
                 .setAction(annee)
                 .build());
     }
