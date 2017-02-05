@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Agenda</string>
-    <string name="version_app">2.1.4</string>
-    <string name="version_app_menu">v2.1.4</string>
+    <string name="version_app">2.1.6</string>
+    <string name="version_app_menu">v2.1.6</string>
 
     <!-- Menus -->
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
@@ -58,12 +58,29 @@
 
     <string name="pref_title_nbWeeks">Nombre de semaine(s) à afficher</string>
     <string name="pref_nbWeeks">1</string>
-    <string name="pref_title_nightMode">Mode nuit</string>
-    <string name="pref_nightMode">Transforme l\'application avec des couleurs plus sombre.</string>
+    <string name="pref_title_view">Vue horizontal</string>
+    <string name="pref_view">Permet d\'afficher l\'agenda de manière horizontal.</string>
     <string name="pref_title_cacheReload">Rafraichir le cache</string>
     <string name="pref_cacheReload">Permet de rafraichir le cache à chaque fois, même si celui-ci n\'est pas expiré.</string>
+    <string name="pref_theme">Thème de l\'application</string>
+    <string-array name="pref_theme_titles">
+        <item>Thème clair</item>
+        <item>Thème sombre</item>
+        <item>Thème personnalisé</item>
+    </string-array>
+    <string-array name="pref_theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>custom</item>
+    </string-array>
 
-    <string name="pref_ringtone_silent">null</string>
+    <string name="pref_theme_colorPrimary">Couleur principale</string>
+    <string name="pref_theme_colorPrimary_summary">Couleur de la barre de navigation et le fond des dates</string>
+    <string name="pref_theme_colorPrimary_summaryOFF">Vous devez selectionner "Thème personnaliser" pour accéder à ce paramètre.</string>
+    <string name="pref_title_nightMode">Mode nuit</string>
+    <string name="pref_nightMode">Transforme le fond de l\'application avec des couleurs plus sombre.</string>
+    <string name="pref_title_theme_header">Assortir menu latéral</string>
+    <string name="pref_theme_header">Permet d\'assortir la couleur du header (le fond) du menu latéral</string>
 
     <!-- Update -->
     <string name="update_checked_noupdate">Vous avez la dernière version.</string>

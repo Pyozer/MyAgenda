@@ -1,13 +1,16 @@
 package com.pyozer.myagenda;
 
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.preference.PreferenceActivity;
+import android.support.v4.app.Fragment;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
-public class WebAppInterface {
+public class WebAppInterface extends AppCompatPreferenceActivity{
     private Context mContext;
 
     /** Instantiate the interface and set the context */
@@ -69,8 +72,10 @@ public class WebAppInterface {
                 .setMessage(message)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent myIntent = new Intent(mContext, SettingsActivity.class);
-                        mContext.startActivity(myIntent);
+                        Intent intent = new Intent(mContext, SettingsActivity.class);
+                        intent.putExtra( PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment.class.getName() );
+                        intent.putExtra( PreferenceActivity.EXTRA_NO_HEADERS, true );
+                        mContext.startActivity(intent);
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

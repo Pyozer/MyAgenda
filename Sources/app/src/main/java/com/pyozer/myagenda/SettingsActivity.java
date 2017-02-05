@@ -5,21 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+
+import com.thebluealliance.spectrum.SpectrumPreference;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -57,28 +56,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                         index >= 0
                                 ? listPreference.getEntries()[index]
                                 : null);
-
-            } else if (preference instanceof RingtonePreference) {
-                // For ringtone preferences, look up the correct display value
-                // using RingtoneManager.
-                if (TextUtils.isEmpty(stringValue)) {
-                    // Empty values correspond to 'silent' (no ringtone).
-                    preference.setSummary(R.string.pref_ringtone_silent);
-
-                } else {
-                    Ringtone ringtone = RingtoneManager.getRingtone(
-                            preference.getContext(), Uri.parse(stringValue));
-
-                    if (ringtone == null) {
-                        // Clear the summary if there was a lookup error.
-                        preference.setSummary(null);
-                    } else {
-                        // Set the summary to reflect the new ringtone display
-                        // name.
-                        String name = ringtone.getTitle(preference.getContext());
-                        preference.setSummary(name);
-                    }
-                }
 
             } else {
                 // For all other preferences, set the summary to the value's
@@ -119,11 +96,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
-            setTheme(R.style.AppThemeNight);
-        }
+        AppTheme appTheme = new AppTheme(this, false);
+        setTheme(appTheme.getStyle());
         super.onCreate(savedInstanceState);
         setupActionBar();
+
     }
 
     /**
@@ -239,31 +216,31 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             CharSequence[] titles_staps2 = {"GP A1", "GP A2", "GP B3", "GP B4", "GP C5", "GP C6", "GP D7", "GP D8"};
             CharSequence[] values_staps2 = {"A", "B", "C", "D", "E", "F", "G", "H"};
 
-            if(Objects.equals(depart, "1") && Objects.equals(annee, "1")) { // Si Info1
+            if (Objects.equals(depart, "1") && Objects.equals(annee, "1")) { // Si Info1
                 group.setEntries(titles_info1);
                 group.setEntryValues(values_info1);
-            } else if(Objects.equals(depart, "2") && Objects.equals(annee, "2")) { // Si MMI2
+            } else if (Objects.equals(depart, "2") && Objects.equals(annee, "2")) { // Si MMI2
                 group.setEntries(titles_mmi2);
                 group.setEntryValues(values_mmi2);
-            } else if(Objects.equals(depart, "1") && Objects.equals(annee, "2")) { // Si Info2
+            } else if (Objects.equals(depart, "1") && Objects.equals(annee, "2")) { // Si Info2
                 group.setEntries(titles_info2);
                 group.setEntryValues(values_info2);
-            } else if((Objects.equals(depart, "2") && Objects.equals(annee, "1")) || (Objects.equals(depart, "3") && Objects.equals(annee, "1")))  { // Si MMI1 ou GB1
+            } else if ((Objects.equals(depart, "2") && Objects.equals(annee, "1")) || (Objects.equals(depart, "3") && Objects.equals(annee, "1"))) { // Si MMI1 ou GB1
                 group.setEntries(titles_mmi1_gb1);
                 group.setEntryValues(values_mmi1_gb1);
-            } else if((Objects.equals(depart, "3") && Objects.equals(annee, "2")))  { // Si GB2
+            } else if ((Objects.equals(depart, "3") && Objects.equals(annee, "2"))) { // Si GB2
                 group.setEntries(titles_gb2);
                 group.setEntryValues(values_gb2);
-            } else if(Objects.equals(depart, "4") && Objects.equals(annee, "1"))  { //Si TC 1
+            } else if (Objects.equals(depart, "4") && Objects.equals(annee, "1")) { //Si TC 1
                 group.setEntries(titles_tc1);
                 group.setEntryValues(values_tc1);
-            } else if(Objects.equals(depart, "4") && Objects.equals(annee, "2"))  { // Si tc 2
+            } else if (Objects.equals(depart, "4") && Objects.equals(annee, "2")) { // Si tc 2
                 group.setEntries(titles_tc2);
                 group.setEntryValues(values_tc2);
-            } else if((Objects.equals(depart, "5") && Objects.equals(annee, "1")))  { //Si staps 1
+            } else if ((Objects.equals(depart, "5") && Objects.equals(annee, "1"))) { //Si staps 1
                 group.setEntries(titles_staps1);
                 group.setEntryValues(values_staps1);
-            } else if((Objects.equals(depart, "5") && Objects.equals(annee, "2")))  { //Si staps 2
+            } else if ((Objects.equals(depart, "5") && Objects.equals(annee, "2"))) { //Si staps 2
                 group.setEntries(titles_staps2);
                 group.setEntryValues(values_staps2);
             } else {
@@ -271,7 +248,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 group.setEntryValues(values_tc2);
             }
 
-            if(group.getValue() == null || group.findIndexOfValue(group.getValue()) < 0) {
+            if (group.getValue() == null || group.findIndexOfValue(group.getValue()) < 0) {
                 group.setValueIndex(0);
             }
             group.setSummary(group.getEntries()[group.findIndexOfValue(group.getValue())].toString());
@@ -305,6 +282,53 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             bindPreferenceSummaryToValue(findPreference("nbWeeks"));
+            bindPreferenceSummaryToValue(findPreference("pref_theme"));
+
+            final ListPreference pref_theme = (ListPreference) findPreference("pref_theme");
+            final SpectrumPreference pref_theme_colorPrimary = (SpectrumPreference) findPreference("pref_theme_colorPrimary");
+            final SwitchPreference pref_dark_theme = (SwitchPreference) findPreference("pref_dark_theme");
+            final SwitchPreference pref_theme_header = (SwitchPreference) findPreference("pref_theme_header");
+
+            if(!Objects.equals(pref_theme.getValue(), "custom")) {
+                pref_theme_colorPrimary.setEnabled(false);
+                pref_theme_colorPrimary.setSummary(getString(R.string.pref_theme_colorPrimary_summaryOFF));
+                pref_dark_theme.setEnabled(false);
+                pref_theme_header.setEnabled(false);
+            }
+
+            pref_theme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, newValue);
+                    getActivity().recreate();
+                    final String val = newValue.toString();
+                    if (Objects.equals(val, "custom")) {
+                        pref_theme_colorPrimary.setEnabled(true);
+                        pref_theme_colorPrimary.setSummary(getString(R.string.pref_theme_colorPrimary_summary));
+                        pref_dark_theme.setEnabled(true);
+                        pref_theme_header.setEnabled(true);
+                    } else {
+                        pref_theme_colorPrimary.setEnabled(false);
+                        pref_theme_colorPrimary.setSummary(getString(R.string.pref_theme_colorPrimary_summaryOFF));
+                        pref_dark_theme.setEnabled(false);
+                        pref_theme_header.setEnabled(false);
+                    }
+                    return true;
+                }
+            });
+            pref_theme_colorPrimary.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, newValue);
+                    getActivity().recreate();
+                    return true;
+                }
+            });
+            pref_dark_theme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, newValue);
+                    getActivity().recreate();
+                    return true;
+                }
+            });
         }
 
         @Override

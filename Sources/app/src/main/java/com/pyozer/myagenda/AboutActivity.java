@@ -27,10 +27,8 @@ public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
-            this.darkTheme = true;
-            setTheme(R.style.AppThemeNight_NoActionBar);
-        }
+        AppTheme appTheme = new AppTheme(this, true);
+        setTheme(appTheme.getStyle());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -77,11 +75,11 @@ public class AboutActivity extends AppCompatActivity {
         } else {
             icons = new int[] {R.drawable.ic_github_black_24dp, R.drawable.ic_twitter_blue_24dp};
         }
-        DataRecycler movie = new DataRecycler(icons[0], "Projet Github", "https://github.com/Pyozer/MyAgenda");
-        dataList.add(movie);
+        DataRecycler item = new DataRecycler(icons[0], "Projet Github", "https://github.com/Pyozer/MyAgenda");
+        dataList.add(item);
 
-        movie = new DataRecycler(icons[1], "Mon Twitter", "https://twitter.com/Jc_Mousse");
-        dataList.add(movie);
+        item = new DataRecycler(icons[1], "Mon Twitter", "https://twitter.com/Jc_Mousse");
+        dataList.add(item);
 
         mAdapter.notifyDataSetChanged();
     }

@@ -35,9 +35,8 @@ public class UpdateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
-            setTheme(R.style.AppThemeNight);
-        }
+        AppTheme appTheme = new AppTheme(this, false);
+        setTheme(appTheme.getStyle());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
         setupActionBar();
@@ -54,7 +53,7 @@ public class UpdateActivity extends AppCompatActivity {
         update_layout = findViewById(R.id.update_layout);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_Update);
-        swipeRefreshLayout.setColorSchemeResources(R.color.rouge, R.color.indigo, R.color.lime, R.color.orange);
+        swipeRefreshLayout.setColorSchemeResources(R.color.rouge, R.color.md_indigo_500, R.color.md_lime_500, R.color.md_orange_500);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

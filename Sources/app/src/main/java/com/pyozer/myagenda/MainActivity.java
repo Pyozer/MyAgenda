@@ -25,6 +25,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -42,9 +43,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
-            setTheme(R.style.AppThemeNight_NoActionBar);
-        }
+        AppTheme appTheme = new AppTheme(this, true);
+        setTheme(appTheme.getStyle());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -61,12 +61,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView.getHeaderView(0).findViewById(R.id.drawer).setBackgroundResource(appTheme.getGradient());
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setColorSchemeResources(R.color.rouge, R.color.indigo, R.color.lime, R.color.orange);
+        swipeRefreshLayout.setColorSchemeResources(R.color.rouge, R.color.md_indigo_500, R.color.md_lime_500, R.color.md_orange_500);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -167,10 +168,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String annee = preferences.getString("annee", "1");
         String groupe = preferences.getString("groupe", "A");
         String nbWeeks = preferences.getString("nbWeeks", "1");
+        String dark_theme = preferences.getString("pref_theme", "light");
         boolean nightMode = preferences.getBoolean("pref_dark_theme", false);
-        String theme = (nightMode) ? "dark" : "light";
+        boolean horizontal = preferences.getBoolean("pref_view", false);
+        String theme = (dark_theme.equals("dark")) ? "dark" : "light";
+        if(dark_theme.equals("custom")) {
+            theme = (nightMode) ? "dark" : "light";
+        }
+        String viewType = "";
+        if(horizontal) {
+            viewType = "&horizontal=true";
+        }
 
-        String url = "http://jourmagic.fr/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks;
+        String url = "http://perso.univ-lemans.fr/~i162431/MyAgenda/get_calendar.php?depart=" + depart + "&annee=" + annee + "&grp=" + groupe + "&nbWeeks=" + nbWeeks + viewType;
         // On ajoute la version actuelle
         url += "&version=" + getString(R.string.version_app);
         // On ajoute le thème désiré

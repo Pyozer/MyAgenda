@@ -1,4 +1,5 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditTextPreference
         android:defaultValue="@string/pref_nbWeeks"
@@ -10,15 +11,47 @@
         android:title="@string/pref_title_nbWeeks" />
 
     <SwitchPreference
-        android:key="pref_dark_theme"
-        android:title="@string/pref_title_nightMode"
-        android:summary="@string/pref_nightMode"
-        android:defaultValue="false" />
+        android:defaultValue="false"
+        android:key="pref_view"
+        android:summary="@string/pref_view"
+        android:title="@string/pref_title_view" />
 
     <SwitchPreference
+        android:defaultValue="true"
         android:key="pref_cacheReload"
-        android:title="@string/pref_title_cacheReload"
         android:summary="@string/pref_cacheReload"
-        android:defaultValue="true" />
+        android:title="@string/pref_title_cacheReload" />
+
+    <PreferenceCategory android:title="Thème">
+
+        <ListPreference
+            android:defaultValue="light"
+            android:entries="@array/pref_theme_titles"
+            android:entryValues="@array/pref_theme_values"
+            android:key="pref_theme"
+            android:title="@string/pref_theme" />
+
+        <com.thebluealliance.spectrum.SpectrumPreference
+            android:defaultValue="@color/md_blue_grey_500"
+            android:key="pref_theme_colorPrimary"
+            android:summary="@string/pref_theme_colorPrimary_summary"
+            android:title="@string/pref_theme_colorPrimary"
+            app:spectrum_colors="@array/color_choices"
+            app:spectrum_outlineWidth="1dp" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_dark_theme"
+            android:summary="@string/pref_nightMode"
+            android:title="@string/pref_title_nightMode" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="pref_theme_header"
+            android:summary="@string/pref_theme_header"
+            android:title="@string/pref_title_theme_header" />
+
+    </PreferenceCategory>
+
 
 </PreferenceScreen>

@@ -20,11 +20,40 @@
     <color name="lightWhite">#f0f0f0</color>
     <color name="lightGrey">#eeeeee</color>
     <color name="rouge">#F33535</color>
-    <color name="indigo">#3F51B5</color>
-    <color name="lime">#7ddc39</color>
-    <color name="orange">#ff5500</color>
+
     <!-- Gradient -->
     <color name="bg_gradient_start">#31244e</color>
     <color name="bg_gradient_end">#6b394c</color>
     <color name="colorTopSplash">#5b2d3f</color>
+
+    <color name="bg_gradient_start_900">#261c3e</color>
+    <color name="bg_gradient_end_900">#462331</color>
+
+    <!-- ColorPicker -->
+    <array name="color_choices">
+        <item>@color/md_red_500</item>
+        <item>@color/md_red_700</item>
+        <item>@color/md_pink_500</item>
+        <item>@color/md_purple_500</item>
+        <item>@color/md_deep_purple_500</item>
+        <item>@color/bg_gradient_start</item>
+        <item>@color/bg_gradient_end</item>
+        <item>@color/md_indigo_500</item>
+        <item>@color/md_blue_700</item>
+        <item>@color/md_light_blue_700</item>
+        <item>@color/md_blue_500</item>
+        <item>@color/md_light_blue_500</item>
+        <item>@color/md_cyan_500</item>
+        <item>@color/md_teal_500</item>
+        <item>@color/md_green_500</item>
+        <item>@color/md_light_green_500</item>
+        <item>@color/md_lime_500</item>
+        <item>@color/md_amber_500</item>
+        <item>@color/md_orange_500</item>
+        <item>@color/md_deep_orange_500</item>
+        <item>@color/md_brown_500</item>
+        <item>@color/md_blue_grey_500</item>
+        <item>@color/md_grey_500</item>
+        <item>@color/md_grey_800</item>
+    </array>
 </resources>

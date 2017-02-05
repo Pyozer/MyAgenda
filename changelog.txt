@@ -1,9 +1,16 @@
-			p { margin-bottom: 0; }
+﻿			p { margin-bottom: 0; }
 			ul { margin-top: 0; }
 			li { margin-left: -20px; }
 		</style>
 	</head>
 	<body>
+		<p>Version 2.1.6:</p>
+		<ul>
+			<li>Ajout de 48 thèmes personnalisés</li>
+			<li>Possibilité de voir les jours horizontalement</li>
+			<li>Changement de serveur</li>
+		</ul>
+
 		<p>Version 2.1.5:</p>
 		<ul>
 			<li>Bug qui faisait crash, pour les STAPS</li>
