@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>last_version</key>
+        <value>3.0.1</value>
+    </entry>
+    <entry>
+        <key>last_version_link</key>
+        <value>https://github.com/Pyozer/MyAgenda/raw/master/Versions/MyAgenda_v3.0.1.apk</value>
+    </entry>
+    <entry>
+        <key>changelog_link</key>
+        <value>https://raw.githubusercontent.com/Pyozer/MyAgenda/master/changelog.txt</value>
+    </entry>
+</defaultsMap>

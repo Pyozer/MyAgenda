@@ -1,0 +1,144 @@
+<resources>
+    <!-- Menus -->
+    <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
+    <string name="navigation_drawer_close">Fermer le menu de navigation</string>
+
+    <string name="menu_find_room">Trouver une salle</string>
+    <string name="menu_about">A propos</string>
+    <string name="menu_settings">Paramètres</string>
+    <string name="menu_update">Mise à jour</string>
+    <string name="menu_intro">Introduction</string>
+
+    <!-- Paramètres -->
+    <string name="pref_header_mygroup">Général</string>
+    <string name="pref_header_display">Affichage</string>
+
+    <string name="pref_title_depart">Sélectionne ton département</string>
+    <string name="pref_title_annee">Sélectionne ton année</string>
+    <string name="pref_title_groupe">Sélectionne ton groupe</string>
+
+    <string name="pref_title_nbWeeks">Nombre de semaine(s) à afficher</string>
+    <string name="pref_nbWeeks">1</string>
+    <string name="pref_title_cacheReload">Rafraichir le cache</string>
+    <string name="pref_cacheReload">Permet de rafraichir le cache à chaque fois, même si celui-ci n\'est pas expiré.</string>
+    <string name="pref_theme">Thème de l\'application</string>
+    <string-array name="pref_theme_titles">
+        <item>Thème clair</item>
+        <item>Thème sombre</item>
+        <item>Thème personnalisé</item>
+    </string-array>
+
+    <string name="pref_theme_colorPrimary">Couleur principale</string>
+    <string name="pref_theme_colorPrimary_summary">Couleur de la barre de navigation et le fond des dates</string>
+    <string name="pref_theme_colorPrimary_summaryOFF">Vous devez selectionner "Thème personnalisé" pour accéder à ce paramètre.</string>
+    <string name="pref_title_nightMode">Mode nuit</string>
+    <string name="pref_nightMode">Transforme le fond de l\'application avec des couleurs plus sombre.</string>
+    <string name="pref_title_theme_header">Assortir menu latéral</string>
+    <string name="pref_theme_header">Permet d\'assortir la couleur du header (le fond) du menu latéral</string>
+
+    <string name="pref_theme_colorNote">Couleur note présente</string>
+    <string name="pref_theme_colorNote_summary">Couleur lateral indiquant la présence d\'une note sur un cours.</string>
+
+    <!-- Update -->
+    <string name="update_checked_noupdate">Vous avez la dernière version.</string>
+    <string name="update_checked_newupdate">Mise à jour disponible !</string>
+    <string name="update_download_last">Télécharger la Mise à jour</string>
+    <string name="update_actual_version">Version actuelle:</string>
+    <string name="update_last_version">Dernière version:</string>
+    <string name="update_version">Version</string>
+    <string name="update_changelog">Changelog</string>
+
+    <!-- Erreurs -->
+    <string name="no_internet">Aucune connexion internet.</string>
+    <string name="no_changelog_get">Impossible de récupérer le changelog.</string>
+    <string name="no_connexion_client">Impossible de se connecter au serveur.</string>
+
+    <string name="agenda_empty">Aucune donnée trouvé</string>
+    <string name="agenda_empty_text">Il semblerai que vous n\'avez pas de données en cache.\nEssayer de rafraichir avec internet.</string>
+    <string name="agenda_no_event_text">Aucun cours n\'a été trouvé.\nEssayez d\'augmenter le nombre de semaines.</string>
+
+    <!-- A propos -->
+    <string name="about_whatIsIt">Qu\'est-ce que c\'est</string>
+    <string name="about_whatIsIt_text">
+        "Cette application est reliée à l\'agenda de l\'Université du Mans présent sur l\'ENT."
+        "Elle vous permet d\'avoir directement accès à votre agenda via votre téléphone ou tablette sans avoir besoin de se connecter à l\'ENT."
+    </string>
+
+    <string name="about_howItsWorks">Comment ça fonctionne</string>
+    <string name="about_howItsWorks_text">
+        "L'application va récupérer la liste des cours, les triées par date, et les afficher. A chaque chargement les cours sont mis en cache sur votre appareil, ce qui permet une utilisation hors connexion."
+        "Vous avez aussi la possibilité d'ajouter des notes ainsi que des évènements personnalisés (exemple: un rendez-vous). Ces données la sont elles aussi sauvegardés sur votre appareil et supprimé quand elles sont expirés."
+    </string>
+
+    <string name="about_who">Auteur</string>
+    <string name="about_who_text">
+        "Je m'appelle Jean-Charles Moussé, je suis étudiant en 2eme année au département Informatique."
+        "Ayant eu marre de devoir toujours me connecter à l'ENT pour voir l'emploi du temps, j'ai décidé de créer cette application pour me faciliter la vie ;)"
+        "Au fil du temps et des remarques je l'ai amélioré, pour au final intégrer tous les départements de l'IUT, des notes et d'évènements personnalisés."
+    </string>
+
+    <string name="github_project">Projet Github</string>
+    <string name="my_twitter">Mon Twitter</string>
+    <string name="no_email_client">Il n\'y a aucun client mail installé.</string>
+    <string name="send_by">Envoyer via…</string>
+
+    <string name="app_new_update">Nouvelle mise à jour disponible !</string>
+    <string name="app_new_update_text">Cliquez-ici ou allez dans le menu mise à jour.</string>
+
+    <string name="note_dialog_input">Votre text</string>
+    <string name="want_change_agenda">Voulez vous changer d\'agenda ?</string>
+    <string name="start_in">Débute dans</string>
+    <string name="event_in_progress">En cours…</string>
+    <string name="end_in">Fin dans</string>
+    <string name="day">j</string>
+    <string name="hour">h</string>
+    <string name="min">min</string>
+    <string name="sec">sec</string>
+
+    <string name="event_note">Note:</string>
+    <string name="dialog_note_title">Note du cours</string>
+    <string name="dialog_save_note">Enregistrer</string>
+
+    <!-- Intro text -->
+    <string name="intro_welcome_title">Bienvenue !</string>
+    <string name="intro_welcome_desc">MyAgenda vous permet d\'accéder à l\'agenda de Le Mans Université directement sur votre téléphone / tablette !</string>
+
+    <string name="intro_agenda_title">Choisi ton agenda</string>
+    <string name="intro_agenda_desc">Dans les paramètres, vous pourrez choisir votre département, année et groupe pour afficher l\'agenda correspondant.</string>
+
+    <string name="intro_customization_title">Personnalisation</string>
+    <string name="intro_customization_desc">Choisissez entre un thème clair, sombre ou bien personnalisé. Un total de 48 combinaisons est possible !</string>
+
+    <string name="intro_note_title">Note</string>
+    <string name="intro_note_desc">Appuyez longuement sur un cours, et saisissez votre note. Une couleur apparaitera sur le coté, celle-ci est personnalisable.</string>
+
+    <string name="intro_event_title">Évènement personnalisé</string>
+    <string name="intro_event_desc">Vous pouvez ajouter votre propre évènement à l\'agenda et lui attribuer à une couleur spécial.</string>
+
+    <string name="intro_offline_title">Mode hors connexion</string>
+    <string name="intro_offline_desc">Une fois votre agenda chargé au moins une fois, il sera sauvegardé pour une utilisation hors connexion.</string>
+
+    <!-- Add event -->
+    <string name="add_custom_event">Ajouter un évènement</string>
+    <string name="add_event_title">Titre</string>
+    <string name="add_event_desc">Lieu</string>
+    <string name="add_event_date">Date de l\'évènement</string>
+    <string name="add_event_time_start">Heure de début</string>
+    <string name="add_event_time_end">Heure de fin</string>
+    <string name="add_event_want_custom_color">Couleur personnalisée</string>
+    <string name="add_event_submit">Ajouter</string>
+    <string name="error_field_required">Champs de texte obligatoire.</string>
+    <string name="error_max_40_length">Maximum 40 caractères.</string>
+    <string name="error_date_before_today">La date doit être supérieur ou égale à aujourd\'hui.</string>
+    <string name="error_hour_end_inferior">Les horaires de fin doivent être supérieur ou égale à celle du début.</string>
+    <string name="add_event_success">L\'évènement a bien été ajouté.</string>
+    <string name="dialog_remove_event">Supprimer évènement</string>
+    <string name="search">Rechercher</string>
+    <string name="available_until">Disponible jusqu\'à</string>
+    <string name="Building">Bâtiment</string>
+    <string name="error">Une erreur est survenue :/</string>
+    <string name="no_room_found">Aucune salle n\'a été trouvé :/</string>
+    <string name="find_room_finish">Chargement fini</string>
+
+
+</resources>

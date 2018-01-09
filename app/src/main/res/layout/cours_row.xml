@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:clickable="true"
+    android:orientation="horizontal">
+
+    <View
+        android:id="@+id/cours_has_note"
+        android:layout_width="6dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccentNight" />
+
+    <LinearLayout
+        android:id="@+id/cours_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="13dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/cours_titre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textSize="16sp"
+            android:layout_marginBottom="7dp" />
+
+        <TextView
+            android:id="@+id/cours_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textSize="14sp"
+            android:layout_marginBottom="7dp" />
+
+        <TextView
+            android:id="@+id/cours_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cours_separator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_grey_300"
+        android:padding="14dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cours_jour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/md_black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

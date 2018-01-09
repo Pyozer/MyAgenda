@@ -1,0 +1,162 @@
+<resources>
+    <string name="app_name">MyAgenda</string>
+    <string name="version_app">3.0.1</string>
+    <string name="version_app_menu">v3.0.1</string>
+
+    <!-- Menus -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="menu_find_room">Find a room</string>
+    <string name="menu_about">About</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_update">Update</string>
+    <string name="menu_intro">Introduction</string>
+
+    <!-- Paramètres -->
+    <string name="pref_header_mygroup">General</string>
+    <string name="pref_header_display">Display</string>
+
+    <string name="pref_title_depart">Select your department</string>
+    <string name="pref_title_annee">Select your year</string>
+    <string name="pref_title_groupe">Select your group</string>
+
+    <string-array name="pref_depart_titlesandvalues">
+        <item>Informatique</item>
+    </string-array>
+    <string-array name="pref_group_titlesandvalues">
+        <item>Grp 11A</item>
+    </string-array>
+    <string-array name="pref_annee_titlesandvalues">
+        <item>Info 1</item>
+    </string-array>
+
+    <string name="pref_title_nbWeeks">Number of week(s) to display</string>
+    <string name="pref_nbWeeks">1</string>
+    <string name="pref_title_cacheReload">Refresh the cache</string>
+    <string name="pref_cacheReload">Allows you to refresh the cache every time, even if it has not expired.</string>
+    <string name="pref_theme">Application Theme</string>
+    <string-array name="pref_theme_titles">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Custom</item>
+    </string-array>
+    <string-array name="pref_theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>custom</item>
+    </string-array>
+
+    <string name="pref_theme_colorPrimary">Main color</string>
+    <string name="pref_theme_colorPrimary_summary">Navigation bar color and date background</string>
+    <string name="pref_theme_colorPrimary_summaryOFF">You must select "Custom Theme" to access this setting.</string>
+    <string name="pref_title_nightMode">Night mode</string>
+    <string name="pref_nightMode">Transforms the background of the application with darker colors.</string>
+    <string name="pref_title_theme_header">Assort the side menu</string>
+    <string name="pref_theme_header">Sets the color of the header (the background) to the side menu</string>
+
+    <string name="pref_theme_colorNote">Color note present</string>
+    <string name="pref_theme_colorNote_summary">Side color indicating the presence of a note on a event.</string>
+
+    <!-- Update -->
+    <string name="update_checked_noupdate">You have the latest version.</string>
+    <string name="update_checked_newupdate">Update available!</string>
+    <string name="update_download_last">Download Update</string>
+    <string name="update_actual_version">Current version:</string>
+    <string name="update_last_version">Last version:</string>
+    <string name="update_version">Version</string>
+    <string name="update_changelog">Changelog</string>
+
+    <!-- Erreurs -->
+    <string name="no_internet">No internet connection.</string>
+    <string name="no_changelog_get">Unable to retrieve changelog.</string>
+    <string name="no_connexion_client">Impossible to connect to the server.</string>
+
+    <string name="agenda_empty">No data found</string>
+    <string name="agenda_empty_text">It seems that you do not have any data cached.\nTry to refresh with internet.</string>
+    <string name="agenda_no_event_text">No event were found.\nTry increasing the number of weeks.</string>
+
+    <!-- A propos -->
+    <string name="about_whatIsIt">What is it?</string>
+    <string name="about_whatIsIt_text">
+        "This application is linked to the agenda of the University of Le Mans present on the ENT."
+        "It allows you to have direct access to your calendar on your phone or tablet without having to connect to the ENT."
+    </string>
+
+    <string name="about_howItsWorks">How it works</string>
+    <string name="about_howItsWorks_text">
+        "The application will retrieve the list of courses, sorted by date, and display them. With each load the courses are cached on your device, allowing for offline use."
+        "You can also add notes and personalized events (for example, an appointment). This data is also saved on your device and deleted when it expires."
+    </string>
+
+    <string name="about_who">Auteur</string>
+    <string name="about_who_text">
+        "My name is Jean-Charles Moussé, I am a student in the 2nd year in the Computer Science department."
+        "Having been fed up with having to always connect to the ENT to see the schedule, I decided to create this application to make my life easier ;)"
+        "Over time and remarks I improved it, to finally integrate all the departments of the IUT, notes and personalized events."
+    </string>
+
+    <string name="github_project">Project Github</string>
+    <string name="my_twitter">My Twitter</string>
+    <string name="no_email_client">There are no mail clients installed.</string>
+    <string name="send_by">Send by…</string>
+
+    <string name="app_new_update">New update available!</string>
+    <string name="app_new_update_text">Click here or go to the update menu.</string>
+
+    <string name="note_dialog_input">Your text</string>
+    <string name="want_change_agenda">Do you want to change your agenda?</string>
+    <string name="start_in">Starts in</string>
+    <string name="event_in_progress">In progress…</string>
+    <string name="end_in">End in</string>
+    <string name="day">d</string>
+    <string name="hour">h</string>
+    <string name="min">min</string>
+    <string name="sec">sec</string>
+
+    <string name="event_note">Note:</string>
+    <string name="dialog_note_title">Event note</string>
+    <string name="dialog_save_note">Save</string>
+
+    <!-- Intro text -->
+    <string name="intro_welcome_title">Welcome !</string>
+    <string name="intro_welcome_desc">MyAgenda allows you to access the Le Mans University calendar directly on your phone / tablet!</string>
+
+    <string name="intro_agenda_title">Choose your agenda</string>
+    <string name="intro_agenda_desc">In the settings, you can choose your department, year and group to display the corresponding calendar.</string>
+
+    <string name="intro_customization_title">Personalization</string>
+    <string name="intro_customization_desc">Choose between a light, dark or custom theme. A total of 48 combinations is possible!</string>
+
+    <string name="intro_note_title">Note</string>
+    <string name="intro_note_desc">Press and hold a course and enter your note. A color will appear on the side, this one is customizable.</string>
+
+    <string name="intro_event_title">Custom event</string>
+    <string name="intro_event_desc">You can add your own event to the calendar and assign it to a special color.</string>
+
+    <string name="intro_offline_title">Offline Mode</string>
+    <string name="intro_offline_desc">Once your calendar is loaded at least once, it will be backed up for offline use.</string>
+
+    <!-- Add event -->
+    <string name="add_custom_event">Add an event</string>
+    <string name="add_event_title">Title</string>
+    <string name="add_event_desc">Description</string>
+    <string name="add_event_date">Event date</string>
+    <string name="add_event_time_start">Start time</string>
+    <string name="add_event_time_end">End time</string>
+    <string name="add_event_want_custom_color">Custom color</string>
+    <string name="add_event_submit">Add</string>
+    <string name="error_field_required">Required text fields.</string>
+    <string name="error_max_40_length">Maximum 40 characters.</string>
+    <string name="error_date_before_today">The date must be greater than or equal to today.</string>
+    <string name="error_hour_end_inferior">End time must be greater than or equal to the start time.</string>
+    <string name="add_event_success">The event was successfully added.</string>
+    <string name="dialog_remove_event">Delete event</string>
+    <string name="search">Search</string>
+    <string name="available_until">Available until</string>
+    <string name="Building">Building</string>
+    <string name="error">Error occurred</string>
+    <string name="no_room_found">No rooms found: /</string>
+    <string name="find_room_finish">Loading finish</string>
+
+</resources>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pyozer.myagenda.activity.AddEventCustomActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="?android:dividerHorizontal"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+
+        <EditText
+            android:id="@+id/add_event_title"
+            style="@style/FullWidthEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|start"
+            android:hint="@string/add_event_title"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:maxLength="40" />
+
+
+        <EditText
+            android:id="@+id/add_event_desc"
+            style="@style/FullWidthEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|start"
+            android:hint="@string/add_event_desc"
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences"
+            android:maxLength="40" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                style="@style/FullWidthEditTextIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="?attr/themedCalendarDrawable" />
+
+            <EditText
+                android:id="@+id/add_event_date"
+                style="@style/FullWidthEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="@string/add_event_date"
+                android:inputType="date" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/FullWidthEditTextIconMiddle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="?attr/themedScheduleDrawable" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:listPreferredItemHeight"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="20dp">
+
+                    <EditText
+                        android:id="@+id/add_event_time_start"
+                        style="@style/FullWidthEditTextLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="@string/add_event_time_start"
+                        android:inputType="time" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/FullWidthEditTextIconMiddle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="?attr/themedScheduleDrawable" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:listPreferredItemHeight"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="20dp">
+
+                    <EditText
+                        android:id="@+id/add_event_time_end"
+                        style="@style/FullWidthEditTextLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="@string/add_event_time_end"
+                        android:inputType="time" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="?android:listPreferredItemPaddingLeft">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/activity_vertical_margin"
+                    android:text="@string/add_event_want_custom_color" />
+
+                <Switch
+                    android:id="@+id/add_event_want_custom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <com.thebluealliance.spectrum.SpectrumPalette
+                android:id="@+id/add_event_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="45dp"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                app:spectrum_colors="@array/color_choices_event" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

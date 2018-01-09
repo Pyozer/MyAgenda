@@ -1,0 +1,25 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="preferencescreen">
+
+    <ListPreference
+        android:defaultValue="Informatique"
+        android:entries="@array/pref_depart_titlesandvalues"
+        android:entryValues="@array/pref_depart_titlesandvalues"
+        android:key="agenda_depart"
+        android:title="@string/pref_title_depart" />
+
+    <ListPreference
+        android:defaultValue="Info 1"
+        android:entries="@array/pref_annee_titlesandvalues"
+        android:entryValues="@array/pref_annee_titlesandvalues"
+        android:key="agenda_annee"
+        android:title="@string/pref_title_annee" />
+
+    <ListPreference
+        android:defaultValue="Grp 11A"
+        android:entries="@array/pref_group_titlesandvalues"
+        android:entryValues="@array/pref_group_titlesandvalues"
+        android:key="agenda_groupe"
+        android:title="@string/pref_title_groupe" />
+
+</PreferenceScreen>

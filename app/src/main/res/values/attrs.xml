@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="themedMenuGroupDrawable" format="reference" />
+    <attr name="themedMenuVisibilityDrawable" format="reference" />
+    <attr name="themedAboutInfoDrawable" format="reference" />
+    <attr name="themedAccountInfoDrawable" format="reference" />
+
+    <attr name="themedScheduleDrawable" format="reference" />
+    <attr name="themedCalendarDrawable" format="reference" />
+</resources>
