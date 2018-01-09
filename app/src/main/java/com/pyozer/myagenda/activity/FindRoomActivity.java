@@ -29,7 +29,7 @@ import com.pyozer.myagenda.R;
 import com.pyozer.myagenda.helper.Utils;
 import com.pyozer.myagenda.model.Cours;
 import com.pyozer.myagenda.model.RoomAvailable;
-import com.pyozer.myagenda.ui.adapter.FindRoomAdapter;
+import com.pyozer.myagenda.adapter.FindRoomAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

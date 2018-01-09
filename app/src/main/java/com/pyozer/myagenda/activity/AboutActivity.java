@@ -17,7 +17,7 @@ import com.pyozer.myagenda.ClickListener;
 import com.pyozer.myagenda.DataRecyclerTouch;
 import com.pyozer.myagenda.R;
 import com.pyozer.myagenda.model.DataRecycler;
-import com.pyozer.myagenda.ui.adapter.DataRecyclerAdapter;
+import com.pyozer.myagenda.adapter.DataRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

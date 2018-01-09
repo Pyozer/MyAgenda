@@ -37,7 +37,7 @@ import com.pyozer.myagenda.preferences.PrefManagerCache;
 import com.pyozer.myagenda.preferences.PrefManagerConfig;
 import com.pyozer.myagenda.preferences.PrefManagerEventCustom;
 import com.pyozer.myagenda.preferences.PrefManagerNote;
-import com.pyozer.myagenda.ui.adapter.CoursAdapter;
+import com.pyozer.myagenda.adapter.CoursAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
