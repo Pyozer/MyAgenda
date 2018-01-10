@@ -25,6 +25,11 @@ public class PrefManagerConfig extends PrefManager {
         return pref.getBoolean(AppConfig.PREF_CACHE_RELOAD, true);
     }
 
+    public String getDepartUser() {
+        return pref.getString(AppConfig.PREF_DEPART_KEY, AppConfig.PREF_DEPART_DEFAULT);
+    }
+
+
     public String getAnneeUser() {
         return pref.getString(AppConfig.PREF_ANNEE_KEY, AppConfig.PREF_ANNEE_DEFAULT);
     }

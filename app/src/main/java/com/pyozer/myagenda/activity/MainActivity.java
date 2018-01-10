@@ -25,6 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.pyozer.myagenda.ClickListener;
 import com.pyozer.myagenda.DataRecyclerTouch;
 import com.pyozer.myagenda.R;
@@ -50,6 +51,8 @@ import static com.pyozer.myagenda.helper.AppConfig.LAST_VERSION;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     private CardView mAgendaEmpty;
     private CardView mAppUpdate;
     private TextView mAgendaTitle;
@@ -74,6 +77,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         mPreferences = new PrefManagerConfig(this);
         mPreferencesNote = new PrefManagerNote(this);
@@ -214,6 +219,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (mCoursList.size() == 0) showEmptyMessage(true);
 
         mAdapter.notifyDataSetChanged();
+
+        sendAnalytics();
+    }
+
+    private void sendAnalytics() {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.GROUP_ID, mPreferences.getGroupeResUser());
+        bundle.putString(FirebaseAnalytics.Param.LEVEL, mPreferences.getAnneeUser());
+        bundle.putString(FirebaseAnalytics.Param.LOCATION, mPreferences.getDepartUser());
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
     public String[] prepareURL() {
