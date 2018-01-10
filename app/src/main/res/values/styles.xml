@@ -593,4 +593,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="SpinnerTheme" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:textColorPrimary">@color/md_black</item>
+    </style>
+    <style name="SpinnerThemeDark" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:textColorPrimary">@color/md_white</item>
+        <item name="android:textColor">@color/md_white</item>
+    </style>
+
 </resources>

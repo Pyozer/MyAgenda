@@ -19,7 +19,8 @@ public class FindRoomAdapter extends RecyclerView.Adapter<FindRoomViewHolder> {
     private List<RoomAvailable> mDataList;
     private Context mContext;
 
-    public FindRoomAdapter(List<RoomAvailable> dataList) {
+    public FindRoomAdapter(Context context, List<RoomAvailable> dataList) {
+        this.mContext = context;
         this.mDataList = dataList;
     }
 
@@ -38,7 +39,7 @@ public class FindRoomAdapter extends RecyclerView.Adapter<FindRoomViewHolder> {
 
         SimpleDateFormat format4RoomEnd = new SimpleDateFormat("HH'h'mm", Locale.getDefault());
 
-        String endAvailable = mContext.getString(R.string.available_until) + format4RoomEnd.format(room.getDateEnd());
+        String endAvailable = mContext.getString(R.string.available_until) + " " + format4RoomEnd.format(room.getDateEnd());
 
         holder.roomEndAvailable.setText(endAvailable);
     }

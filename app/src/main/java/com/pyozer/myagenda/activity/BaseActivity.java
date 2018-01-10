@@ -23,10 +23,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     private static boolean isInitialized = false;
     boolean noActionBar = false;
 
+    private int mThemeAtCreate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         appTheme = new AppTheme(getApplicationContext(), noActionBar);
-        setTheme(appTheme.getStyle());
+        mThemeAtCreate = appTheme.getStyle();
+        setTheme(mThemeAtCreate);
         super.onCreate(savedInstanceState);
 
         if (!isInitialized) {
@@ -40,6 +43,15 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .build();
         mFirebaseRemoteConfig.setConfigSettings(configSettings);
         mFirebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppTheme actualAppTheme = new AppTheme(this, noActionBar);
+        if(mThemeAtCreate != actualAppTheme.getStyle()) { // Si le thème a été changé entre temps
+            recreate();
+        }
     }
 
     // Permet de vérifier la connexion internet

@@ -79,12 +79,12 @@ public class FindRoomActivity extends BaseActivity implements AdapterView.OnItem
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        Spinner mSpinnerDep = findViewById(R.id.find_room_dep);
         mTextHour = findViewById(R.id.find_room_heure);
         mButtonSubmit = findViewById(R.id.find_room_submit);
-        RecyclerView mRecyclerRooms = findViewById(R.id.find_room_results);
 
-        mRecyclerAdapter = new FindRoomAdapter(mListRoomFound);
+        RecyclerView mRecyclerRooms = findViewById(R.id.find_room_results);
+        mRecyclerAdapter = new FindRoomAdapter(this, mListRoomFound);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerRooms.getContext(),
                 DividerItemDecoration.VERTICAL);
@@ -92,10 +92,10 @@ public class FindRoomActivity extends BaseActivity implements AdapterView.OnItem
         mRecyclerRooms.setLayoutManager(mLayoutManager);
         mRecyclerRooms.setAdapter(mRecyclerAdapter);
 
+        Spinner mSpinnerDep = findViewById(R.id.find_room_dep);
         mSpinnerDep.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
         mAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, mListBuildings);
-
         // Specify the layout to use when the list of choices appears
         mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -256,6 +256,10 @@ public class FindRoomActivity extends BaseActivity implements AdapterView.OnItem
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         buildingSelected = String.valueOf(parent.getItemAtPosition(pos));
+        if(appTheme.isDark())
+            ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.md_white));
+        else
+            ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.md_black));
     }
 
     @Override

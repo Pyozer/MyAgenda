@@ -136,4 +136,8 @@ public class AppTheme {
         }
         return drawableGradient;
     }
+
+    public boolean isDark() {
+        return theme.equals("dark") || (theme.equals("custom") && dark);
+    }
 }

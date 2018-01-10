@@ -107,19 +107,9 @@ public class UpdateActivity extends BaseActivity {
     public void showResponseChangeLog(String changelog) {
         mWebViewChangeLog.setBackgroundColor(Color.TRANSPARENT);
 
-        String darkTheme = PreferenceManager.getDefaultSharedPreferences(this).getString("pref_theme", "light");
-        boolean nightTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false);
+        String color = appTheme.isDark() ? "rgb(255, 255, 255);" : "rgb(0, 0, 0);";
 
-        mWebViewChangeLog.setWebViewClient(new WebViewClient() {
-            public void onPageFinished(WebView view, String url) {
-                String color = "rgb(0, 0, 0);";
-                if (darkTheme.equals("dark") || nightTheme) {
-                    color = "rgb(255, 255, 255);";
-                }
-
-                mWebViewChangeLog.loadUrl("javascript:document.body.style.color = \"" + color + "\";");
-            }
-        });
+        changelog = changelog.replace("##BODY_COLOR##", color);
 
         mWebViewChangeLog.loadData(changelog, "text/html; charset=UTF-8", null);
     }

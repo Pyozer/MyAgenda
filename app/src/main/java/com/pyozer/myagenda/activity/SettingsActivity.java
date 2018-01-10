@@ -48,6 +48,8 @@ import static android.content.ContentValues.TAG;
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
+    private int mThemeAtCreate;
+
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
@@ -110,9 +112,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppTheme appTheme = new AppTheme(this, false);
-        setTheme(appTheme.getStyle());
+        mThemeAtCreate = appTheme.getStyle();
+        setTheme(mThemeAtCreate);
         super.onCreate(savedInstanceState);
         setupActionBar();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppTheme appTheme = new AppTheme(this, false);
+        if(mThemeAtCreate != appTheme.getStyle()) {
+            recreate();
+        }
     }
 
     /**
@@ -172,8 +184,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class GeneralPreferenceFragment extends PreferenceFragment {
 
-        private static boolean isInitialized = false;
-
         private DatabaseReference mDatabase;
 
         private TreeMap<String, TreeMap<String, TreeMap<String, String>>> listRessources = new TreeMap<>();
@@ -198,10 +208,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             annee = (ListPreference) findPreference(AppConfig.PREF_ANNEE_KEY);
             groupe = (ListPreference) findPreference(AppConfig.PREF_GROUPE_KEY);
 
-            if (!isInitialized) {
-                FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-                isInitialized = true;
-            }
             mDatabase = FirebaseDatabase.getInstance().getReference().child("departement");
 
             ValueEventListener dataListener = new ValueEventListener() {
