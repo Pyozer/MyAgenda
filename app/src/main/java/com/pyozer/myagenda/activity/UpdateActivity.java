@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
@@ -110,6 +111,7 @@ public class UpdateActivity extends BaseActivity {
         String color = appTheme.isDark() ? "rgb(255, 255, 255);" : "rgb(0, 0, 0);";
 
         changelog = changelog.replace("##BODY_COLOR##", color);
+        Log.e("TEST", changelog);
 
         mWebViewChangeLog.loadData(changelog, "text/html; charset=UTF-8", null);
     }
