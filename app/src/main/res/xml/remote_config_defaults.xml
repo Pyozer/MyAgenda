@@ -6,10 +6,10 @@
     </entry>
     <entry>
         <key>last_version_link</key>
-        <value>https://github.com/Pyozer/MyAgenda/raw/master/Versions/MyAgenda_v3.0.1.apk</value>
+        <value>https://github.com/Pyozer/MyAgenda/raw/master/versions/MyAgenda_v3.0.1.apk</value>
     </entry>
     <entry>
         <key>changelog_link</key>
-        <value>https://raw.githubusercontent.com/Pyozer/MyAgenda/master/changelog.txt</value>
+        <value>https://raw.githubusercontent.com/Pyozer/MyAgenda/master/changelog.html</value>
     </entry>
 </defaultsMap>
