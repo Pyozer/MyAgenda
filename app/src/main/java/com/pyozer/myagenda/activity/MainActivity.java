@@ -249,33 +249,42 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void showAlertDialogCours(int position) {
-        Cours data = mCoursList.get(position);
+        final Cours cours = mCoursList.get(position);
 
-        if (!data.isHeader()) {
-            String timeText;
-            if (data.getDateStart().getTime() >= new Date().getTime())
-                timeText = getString(R.string.start_in) + " " + Utils.timeUntilDate(data.getDateStart(), getString(R.string.day), getString(R.string.hour), getString(R.string.min), getString(R.string.sec));
-            else
-                timeText = getString(R.string.event_in_progress) + "\n"
-                        + getString(R.string.end_in) + " " + Utils.timeUntilDate(data.getDateEnd(), getString(R.string.day), getString(R.string.hour), getString(R.string.min), getString(R.string.sec));
-
-            String message = data.getTitre() + "\n" + data.getDescription() + "\n\n" + timeText;
-            if (data.hasNote())
-                message += "\n\n" + getString(R.string.event_note) + "\n" + data.getNote().getText();
-            showDialog(data.getDateFormat(), message);
+        if (cours.isHeader()) {
+            return;
         }
+
+        String timeText;
+        if (cours.getDateStart().getTime() >= new Date().getTime()) {
+            timeText = getString(R.string.start_in) + " " + Utils.timeUntilDate(cours.getDateStart(), getString(R.string.day), getString(R.string.hour), getString(R.string.min), getString(R.string.sec));
+        } else {
+            timeText = getString(R.string.event_in_progress) + "\n"
+                    + getString(R.string.end_in) + " " + Utils.timeUntilDate(cours.getDateEnd(), getString(R.string.day), getString(R.string.hour), getString(R.string.min), getString(R.string.sec));
+        }
+
+        String message = cours.getTitre() + "\n" + cours.getDescription() + "\n\n" + timeText;
+        if (cours.hasNote()) {
+            message += "\n\n" + getString(R.string.event_note) + "\n" + cours.getNote().getText();
+        }
+        showDialog(cours.getDateFormat(), message);
     }
 
-    private void dialogNote(final int position) {
+    private void dialogNote(int position) {
         final Cours cours = mCoursList.get(position);
+
+        if (cours.isHeader()) {
+            return;
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         View dialoglayout = getLayoutInflater().inflate(R.layout.note_dialog_layout, null);
 
         final EditText noteCours = dialoglayout.findViewById(R.id.note_dialog_input);
-        if (cours.getNote() != null)
+        if (cours.getNote() != null) {
             noteCours.setText(cours.getNote().getText());
+        }
 
         builder.setTitle(getString(R.string.dialog_note_title));
         builder.setCancelable(true);
@@ -294,12 +303,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             cours.setNote(note);
             mAdapter.notifyItemChanged(position);
         });
-        if (cours instanceof EventCustom)
+        if (cours instanceof EventCustom) {
             builder.setNegativeButton(getString(R.string.dialog_remove_event), (dialog, id) -> {
                 mCoursList.remove(cours);
                 mPreferencesCustomCours.removeCustomEvent(cours.getUid());
                 mRecyclerView.getAdapter().notifyItemRemoved(position);
             });
+        }
 
         builder.create();
         builder.show();
