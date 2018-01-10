@@ -111,7 +111,6 @@ public class UpdateActivity extends BaseActivity {
         String color = appTheme.isDark() ? "rgb(255, 255, 255);" : "rgb(0, 0, 0);";
 
         changelog = changelog.replace("##BODY_COLOR##", color);
-        Log.e("TEST", changelog);
 
         mWebViewChangeLog.loadData(changelog, "text/html; charset=UTF-8", null);
     }
