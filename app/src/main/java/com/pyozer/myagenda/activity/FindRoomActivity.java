@@ -58,10 +58,10 @@ public class FindRoomActivity extends BaseActivity implements AdapterView.OnItem
 
     private Calendar mDateTimeMin = GregorianCalendar.getInstance();
 
-    private List<String> mListBuildings;
-    private Map<String, String> mListRoomRes;
+    private List<String> mListBuildings = new ArrayList<>();
+    private Map<String, String> mListRoomRes = new HashMap<>();
 
-    private List<RoomAvailable> mListRoomFound;
+    private List<RoomAvailable> mListRoomFound = new ArrayList<>();
 
     private int numChild = 0;
     private int numRoomLoaded = 0;
@@ -72,10 +72,6 @@ public class FindRoomActivity extends BaseActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_room);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mListBuildings = new ArrayList<>();
-        mListRoomFound = new ArrayList<>();
-        mListRoomRes = new HashMap<>();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -103,11 +99,11 @@ public class FindRoomActivity extends BaseActivity implements AdapterView.OnItem
 
         loadBuildings();
 
-        mButtonSubmit.setOnClickListener(view -> loadRoomRes(buildingSelected));
-
         mDateTimeMin.add(Calendar.HOUR_OF_DAY, 1);
 
         updateEndTimeText();
+
+        mButtonSubmit.setOnClickListener(view -> loadRoomRes(buildingSelected));
 
         mTextHour.setOnClickListener(view -> {
             TimePickerDialog timePickerDialog = new TimePickerDialog(FindRoomActivity.this, (view1, hourOfDay, minute) -> {
@@ -140,10 +136,8 @@ public class FindRoomActivity extends BaseActivity implements AdapterView.OnItem
         buildingRooms.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for (DataSnapshot dataDep : dataSnapshot.getChildren()) {
                     numChild++;
-
                     mListBuildings.add(dataDep.getKey());
                 }
 
@@ -222,7 +216,6 @@ public class FindRoomActivity extends BaseActivity implements AdapterView.OnItem
             checkIfRoomIsAvailable(roomName, Biweekly.parse(response).first());
 
             if (numRoomLoaded >= numRoomToLoad) {
-                // TODO: RETIRER UNE PROGRESSBAR
                 Toast.makeText(FindRoomActivity.this, getString(R.string.find_room_finish), Toast.LENGTH_SHORT).show();
                 mRecyclerAdapter.notifyDataSetChanged();
             }
@@ -256,10 +249,10 @@ public class FindRoomActivity extends BaseActivity implements AdapterView.OnItem
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         buildingSelected = String.valueOf(parent.getItemAtPosition(pos));
-        if(appTheme.isDark())
+        /*if (appTheme.isDark())
             ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.md_white));
         else
-            ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.md_black));
+            ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.md_black));*/
     }
 
     @Override
