@@ -140,5 +140,11 @@
     <string name="no_room_found">Aucune salle n\'a été trouvé :/</string>
     <string name="find_room_finish">Chargement fini</string>
 
+    <!-- Strings related to login -->
+    <string name="signin_prompt_login">Identifiant ENT</string>
+    <string name="signin_prompt_password">Mot de passe</string>
+    <string name="signin_action_submit">Connexion</string>
+    <string name="signin_error">Identifiant ou mot de passe incorrect !</string>
+
 
 </resources>

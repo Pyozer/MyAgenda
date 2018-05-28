@@ -390,6 +390,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(new Intent(MainActivity.this, IntroActivity.class));
         } else if (id == R.id.nav_find_room) {
             startActivity(new Intent(MainActivity.this, FindRoomActivity.class));
+        } else if (id == R.id.nav_signin) {
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -24,4 +24,9 @@
         android:icon="@drawable/ic_lightbulb_outline_black_24dp"
         android:title="@string/menu_intro" />
 
+    <item
+        android:id="@+id/nav_signin"
+        android:icon="@drawable/ic_lightbulb_outline_black_24dp"
+        android:title="@string/signin_action_submit" />
+
 </menu>
