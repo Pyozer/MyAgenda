@@ -12,6 +12,7 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_update">Update</string>
     <string name="menu_intro">Introduction</string>
+    <string name="menu_logout">Logout</string>
 
     <!-- Paramètres -->
     <string name="pref_header_mygroup">General</string>

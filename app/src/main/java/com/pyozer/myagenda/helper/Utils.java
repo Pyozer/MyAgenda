@@ -1,5 +1,7 @@
 package com.pyozer.myagenda.helper;
 
+import android.util.Log;
+
 import com.pyozer.myagenda.model.Cours;
 import com.pyozer.myagenda.model.EventCustom;
 import com.pyozer.myagenda.model.NoteCours;
@@ -11,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
@@ -109,5 +113,14 @@ public class Utils {
             result += ((int) ecartTime) + sec;
         }
         return result.trim() + ".";
+    }
+
+    public static String getStringBetween(String origin, String begin, String end) {
+        Pattern pattern = Pattern.compile(begin + "(.+?)" + end);
+        Matcher matcher = pattern.matcher(origin);
+        if(matcher.find())
+            return matcher.group(1);
+        else
+            return "XD";
     }
 }

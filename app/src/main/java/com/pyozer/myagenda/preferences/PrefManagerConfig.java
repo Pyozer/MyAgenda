@@ -68,4 +68,13 @@ public class PrefManagerConfig extends PrefManager {
         editor.remove(coursUid);
     }
 
+    public String getSessionId() {
+        return pref.getString(AppConfig.ENT_JSESSIONID, "");
+    }
+
+    public void setSessionId(String newSession) {
+        editor.putString(AppConfig.ENT_JSESSIONID, newSession);
+        editor.apply();
+    }
+
 }

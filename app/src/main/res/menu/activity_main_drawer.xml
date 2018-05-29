@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/nav_find_room"
-        android:icon="@drawable/ic_location_city_black_24dp"
-        android:title="@string/menu_find_room" />
-    <item
-        android:id="@+id/nav_settings"
-        android:icon="@drawable/ic_settings_black_24dp"
-        android:title="@string/menu_settings" />
-    <item
-        android:id="@+id/nav_update"
-        android:icon="@drawable/ic_system_update_black_24dp"
-        android:title="@string/menu_update" />
+    <group android:id="@+id/nav_group_action"
+        android:checkableBehavior="single">
 
-    <item
-        android:id="@+id/nav_about"
-        android:icon="@drawable/ic_info_outline_black_24dp"
-        android:title="@string/menu_about" />
+        <item
+            android:id="@+id/nav_find_room"
+            android:icon="@drawable/ic_location_city_black_24dp"
+            android:title="@string/menu_find_room" />
 
-    <item
-        android:id="@+id/nav_intro"
-        android:icon="@drawable/ic_lightbulb_outline_black_24dp"
-        android:title="@string/menu_intro" />
+    </group>
 
-    <item
-        android:id="@+id/nav_signin"
-        android:icon="@drawable/ic_lightbulb_outline_black_24dp"
-        android:title="@string/signin_action_submit" />
+    <group android:id="@+id/nav_group_settings"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/menu_settings" />
+        <item
+            android:id="@+id/nav_update"
+            android:icon="@drawable/ic_system_update_black_24dp"
+            android:title="@string/menu_update" />
 
+    </group>
+
+    <group android:id="@+id/nav_group_info"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="@string/menu_about" />
+
+        <item
+            android:id="@+id/nav_intro"
+            android:icon="@drawable/ic_lightbulb_outline_black_24dp"
+            android:title="@string/menu_intro" />
+
+    </group>
+
+    <group android:id="@+id/nav_group_login"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/baseline_exit_to_app_black_24"
+            android:title="@string/menu_logout" />
+
+    </group>
 </menu>

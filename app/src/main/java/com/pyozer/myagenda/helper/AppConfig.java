@@ -32,4 +32,6 @@ public interface AppConfig {
     String LAST_VERSION = "last_version";
     String LAST_VERSION_LINK = "last_version_link";
     String CHANGELOG_LINK = "changelog_link";
+
+    String ENT_JSESSIONID = "entSessionId";
 }

@@ -30,6 +30,7 @@ import com.pyozer.myagenda.ClickListener;
 import com.pyozer.myagenda.DataRecyclerTouch;
 import com.pyozer.myagenda.R;
 import com.pyozer.myagenda.helper.AppConfig;
+import com.pyozer.myagenda.helper.MyCookieManager;
 import com.pyozer.myagenda.helper.Utils;
 import com.pyozer.myagenda.model.Cours;
 import com.pyozer.myagenda.model.EventCustom;
@@ -84,6 +85,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mPreferencesNote = new PrefManagerNote(this);
         mPreferencesCache = new PrefManagerCache(this);
         mPreferencesCustomCours = new PrefManagerEventCustom(this);
+
+        if(mPreferences.getSessionId().equals("")) {
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        }
 
         mBtnAddCustomEvent = findViewById(R.id.add_custom_event);
         mBtnAddCustomEvent.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AddEventCustomActivity.class)));
@@ -390,7 +395,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(new Intent(MainActivity.this, IntroActivity.class));
         } else if (id == R.id.nav_find_room) {
             startActivity(new Intent(MainActivity.this, FindRoomActivity.class));
-        } else if (id == R.id.nav_signin) {
+        } else if (id == R.id.nav_logout) {
+            mPreferences.setSessionId("");
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
         }
 
