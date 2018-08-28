@@ -29,8 +29,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.pyozer.myagenda.ClickListener;
 import com.pyozer.myagenda.DataRecyclerTouch;
 import com.pyozer.myagenda.R;
+import com.pyozer.myagenda.adapter.CoursAdapter;
 import com.pyozer.myagenda.helper.AppConfig;
-import com.pyozer.myagenda.helper.MyCookieManager;
 import com.pyozer.myagenda.helper.Utils;
 import com.pyozer.myagenda.model.Cours;
 import com.pyozer.myagenda.model.EventCustom;
@@ -39,7 +39,6 @@ import com.pyozer.myagenda.preferences.PrefManagerCache;
 import com.pyozer.myagenda.preferences.PrefManagerConfig;
 import com.pyozer.myagenda.preferences.PrefManagerEventCustom;
 import com.pyozer.myagenda.preferences.PrefManagerNote;
-import com.pyozer.myagenda.adapter.CoursAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -79,16 +78,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
         mPreferences = new PrefManagerConfig(this);
-        mPreferencesNote = new PrefManagerNote(this);
-        mPreferencesCache = new PrefManagerCache(this);
-        mPreferencesCustomCours = new PrefManagerEventCustom(this);
 
         if(mPreferences.getSessionId().equals("")) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            finish();
         }
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        mPreferencesNote = new PrefManagerNote(this);
+        mPreferencesCache = new PrefManagerCache(this);
+        mPreferencesCustomCours = new PrefManagerEventCustom(this);
 
         mBtnAddCustomEvent = findViewById(R.id.add_custom_event);
         mBtnAddCustomEvent.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AddEventCustomActivity.class)));

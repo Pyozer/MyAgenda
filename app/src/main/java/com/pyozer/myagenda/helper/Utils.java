@@ -1,7 +1,5 @@
 package com.pyozer.myagenda.helper;
 
-import android.util.Log;
-
 import com.pyozer.myagenda.model.Cours;
 import com.pyozer.myagenda.model.EventCustom;
 import com.pyozer.myagenda.model.NoteCours;
@@ -22,7 +20,7 @@ import biweekly.component.VEvent;
 public class Utils {
 
     public static String createUrlToIcal(String groupeRes, String nbWeeks) {
-        return "http://edt.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=" + groupeRes + "&projectId=3&calType=ical&nbWeeks=" + nbWeeks;
+        return "http://edt.univ-lemans.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=" + groupeRes + "&projectId=1&calType=ical&nbWeeks=" + nbWeeks;
     }
 
     public static List<Cours> icalToCoursList(ICalendar ical, Map<String, NoteCours> noteCoursList, List<EventCustom> customCours) {

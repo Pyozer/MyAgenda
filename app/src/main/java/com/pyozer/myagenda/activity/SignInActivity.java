@@ -4,11 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.pyozer.myagenda.R;
-import com.pyozer.myagenda.helper.MyCookieManager;
 import com.pyozer.myagenda.helper.Utils;
 import com.pyozer.myagenda.preferences.PrefManagerConfig;
 
@@ -40,7 +38,7 @@ public class SignInActivity extends AppCompatActivity {
     private static final String FORM_LOGIN_URL = "https://cas.univ-lemans.fr/cas/login";
 
     private PrefManagerConfig prefManagerConfig;
-    private MyCookieManager myCookieManager;
+    private CookieManager cookieManager;
 
     // UI references.
     private EditText mUsernameView;
@@ -53,7 +51,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         prefManagerConfig = new PrefManagerConfig(this);
-        if(!prefManagerConfig.getSessionId().equals(""))
+        if (!prefManagerConfig.getSessionId().equals(""))
             startActivity(new Intent(SignInActivity.this, MainActivity.class));
 
         setContentView(R.layout.activity_signin);
@@ -69,13 +67,15 @@ public class SignInActivity extends AppCompatActivity {
             return false;
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.signin_submit);
+        Button mEmailSignInButton = findViewById(R.id.signin_submit);
         mEmailSignInButton.setOnClickListener(view -> attemptLogin());
 
         mLoginFormView = findViewById(R.id.signin_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        myCookieManager = MyCookieManager.getInstance();
+        cookieManager = new CookieManager();
+
+        CookieHandler.setDefault(cookieManager);
     }
 
     /**
@@ -112,16 +112,16 @@ public class SignInActivity extends AppCompatActivity {
             login(username, password);
         }
     }
+
     private void login(String username, String password) {
         showProgress(true);
 
+        cookieManager.getCookieStore().removeAll();
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-
-
         // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,FORM_LOGIN_URL, response -> {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, FORM_LOGIN_URL, response -> {
 
             String lt = Utils.getStringBetween(response, "<input type=\"hidden\" name=\"lt\" value=\"", "\" />");
             String _eventId = "submit";
@@ -129,35 +129,28 @@ public class SignInActivity extends AppCompatActivity {
 
             StringRequest loginRequest = new StringRequest(Request.Method.POST, FORM_LOGIN_URL, (Response.Listener<String>) responseLogin -> {
 
-                String result = "Connexion réussi !";
-                boolean isSuccess = true;
-
-                if(responseLogin.contains("<div id=\"status\" class=\"errors\">")) {
-                    result = Utils.getStringBetween(responseLogin, "<div id=\"status\" class=\"errors\">", "</div>").trim();
-
-                    isSuccess = false;
-                }
-
-                Snackbar.make(findViewById(android.R.id.content), result, Snackbar.LENGTH_LONG).show();
-
-                if(!isSuccess) {
-                    prefManagerConfig.setSessionId("");
-                } else {
-                    prefManagerConfig.setSessionId(myCookieManager.getCookieValue("JSESSIONID"));
-                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                }
+                boolean isSuccess = !responseLogin.contains("<div id=\"status\" class=\"errors\">");
 
                 showProgress(false);
 
+                if (!isSuccess) {
+                    prefManagerConfig.setSessionId("");
+
+                    String result = Utils.getStringBetween(responseLogin, "<div id=\"status\" class=\"errors\">", "</div>").trim();
+                    Snackbar.make(findViewById(android.R.id.content), result, Snackbar.LENGTH_LONG).show();
+                } else {
+                    prefManagerConfig.setSessionId(lt);
+                    startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                    finish();
+                }
             }, error -> {
                 showProgress(false);
                 error.printStackTrace();
                 Snackbar.make(findViewById(android.R.id.content), error.getMessage(), Snackbar.LENGTH_LONG).show();
             }) {
                 @Override
-                protected Map<String, String> getParams()
-                {
-                    Map<String, String>  params = new HashMap<>();
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
                     params.put("_eventId", _eventId);
                     params.put("lt", lt);
                     params.put("submit", submit);
@@ -169,7 +162,6 @@ public class SignInActivity extends AppCompatActivity {
             };
 
             queue.add(loginRequest);
-
         }, error -> {
             showProgress(false);
             error.printStackTrace();
