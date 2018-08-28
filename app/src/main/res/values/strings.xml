@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyAgenda</string>
-    <string name="version_app">3.0.1</string>
-    <string name="version_app_menu">v3.0.1</string>
+    <string name="version_app">3.0.2</string>
+    <string name="version_app_menu">v3.0.2</string>
 
     <!-- Menus -->
     <string name="navigation_drawer_open">Open navigation drawer</string>

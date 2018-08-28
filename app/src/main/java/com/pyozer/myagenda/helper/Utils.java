@@ -116,7 +116,7 @@ public class Utils {
     public static String getStringBetween(String origin, String begin, String end) {
         Pattern pattern = Pattern.compile(begin + "(.+?)" + end);
         Matcher matcher = pattern.matcher(origin);
-        if(matcher.find())
+        if (matcher.find())
             return matcher.group(1);
         else
             return "XD";

@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         mPreferences = new PrefManagerConfig(this);
 
-        if(mPreferences.getSessionId().equals("")) {
+        if (mPreferences.getSessionId().equals("")) {
             startActivity(new Intent(MainActivity.this, SignInActivity.class));
             finish();
         }

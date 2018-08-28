@@ -7,7 +7,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath 'com.google.gms:google-services:4.0.1' // google-services plugin
     }
 }
@@ -19,6 +19,7 @@ allprojects {
         maven { url "http://github.com/wada811/Android-Material-Design-Colors/raw/master/repository/" }
         maven { url "https://maven.google.com" }
         mavenLocal()
+        google()
     }
 }
 

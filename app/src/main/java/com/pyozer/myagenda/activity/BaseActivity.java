@@ -49,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         AppTheme actualAppTheme = new AppTheme(this, noActionBar);
-        if(mThemeAtCreate != actualAppTheme.getStyle()) { // Si le thème a été changé entre temps
+        if (mThemeAtCreate != actualAppTheme.getStyle()) { // Si le thème a été changé entre temps
             recreate();
         }
     }
