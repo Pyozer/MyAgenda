@@ -2,11 +2,11 @@
 <defaultsMap>
     <entry>
         <key>last_version</key>
-        <value>3.0.1</value>
+        <value>3.0.2</value>
     </entry>
     <entry>
         <key>last_version_link</key>
-        <value>https://github.com/Pyozer/MyAgenda/raw/master/versions/MyAgenda_v3.0.1.apk</value>
+        <value>https://github.com/Pyozer/MyAgenda/blob/master/Versions/MyAgenda_v3.0.2.apk?raw=true</value>
     </entry>
     <entry>
         <key>changelog_link</key>
